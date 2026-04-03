@@ -1,0 +1,1 @@
+ALTER TABLE "session" RENAME COLUMN "ip_addresses" TO "ip_address";
