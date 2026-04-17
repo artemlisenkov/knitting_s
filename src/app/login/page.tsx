@@ -1,5 +1,4 @@
-import { Button } from "@/src/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/src/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/src/components/ui/card";
 import {LoginButtons} from "@/src/components/auth/login-buttons";
 import {getSession} from "@/src/lib/auth";
 import {redirect} from "next/dist/client/components/redirect";
@@ -14,20 +13,15 @@ export async function LoginPage() {
       <Card className="w-full max-w-sm gap-4" data-testid="signup-card">
         <CardHeader className="text-center">
           <CardTitle className="text-2xl" data-testid="signup-title">
-            Create an account
+            Sign In
           </CardTitle>
           <CardDescription data-testid="signup-description">
-            Choose a sign up method to get started.
+            First sign in will create an account
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-3 pt-0">
           <LoginButtons />
         </CardContent>
-        <CardFooter>
-          <Button className="w-full" type="submit" form="signup-form" data-testid="create-account">
-            Create account
-          </Button>
-        </CardFooter>
       </Card>
     </div>
   );

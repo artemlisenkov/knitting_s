@@ -1,7 +1,20 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle"
+import { eq } from "drizzle-orm";
 import { headers } from "next/headers";
 import { db } from "@/src/db"
+import { user } from "@/src/db/schema";
+
+const adminEmails = new Set(
+    (process.env.ADMIN_EMAILS ?? "")
+        .split(",")
+        .map((email) => email.trim().toLowerCase())
+        .filter(Boolean)
+);
+
+const isAdminEmail = (email: string | null | undefined) => (
+    email ? adminEmails.has(email.toLowerCase()) : false
+);
 
 export const auth = betterAuth({
     database: drizzleAdapter(db, {
@@ -17,7 +30,27 @@ export const auth = betterAuth({
         },
     },
     emailAndPassword: {
-        enabled: true,
+        enabled: false,
+    },
+    databaseHooks: {
+        user: {
+            create: {
+                before: async (newUser) => isAdminEmail(newUser.email),
+            },
+        },
+        session: {
+            create: {
+                before: async (newSession) => {
+                    const [sessionUser] = await db
+                        .select({ email: user.email })
+                        .from(user)
+                        .where(eq(user.id, newSession.userId))
+                        .limit(1);
+
+                    return isAdminEmail(sessionUser?.email);
+                },
+            },
+        },
     },
 });
 
