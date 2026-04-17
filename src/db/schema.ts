@@ -45,10 +45,3 @@ export const verification = pgTable("verification", {
     createdAt: timestamp("created_at", { precision: 6, withTimezone: true }).notNull(),
     updatedAt: timestamp("updated_at", { precision: 6, withTimezone: true }).notNull(),
 });
-
-// inc\dec+rementer
-export const count = pgTable("count", {
-    id: text("id").primaryKey(),
-    count: integer("count").notNull(),
-    userId: text("user_id").notNull().references(() => user.id, { onDelete: "cascade"}),
-})
