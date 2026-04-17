@@ -15,6 +15,13 @@
       "when": 1775179436544,
       "tag": "0001_strange_millenium_guard",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1776434286768,
+      "tag": "0002_shocking_doctor_spectrum",
+      "breakpoints": true
     }
   ]
 }
