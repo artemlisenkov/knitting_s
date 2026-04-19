@@ -13,7 +13,7 @@ export const landingLanguages: Array<{
 
 type LandingTranslation = {
     brand: string;
-    nav: Record<"aboutMe" | "customOrder" | "catalog" | "delivery" | "contact", string>;
+    nav: Record<"aboutMe" | "catalog" | "palette" | "customOrder" | "delivery" | "contact", string>;
     aboutMe: {
         eyebrow: string;
         title: string;
@@ -39,11 +39,20 @@ type LandingTranslation = {
         groups: Array<{
             title: string;
             products: Array<{
-                id: "cardigan-cloudy";
+                id: "cardigan-cloudy" | "top-zebra" | "top-gradient" | "top-flower" | "top-browny";
                 title: string;
                 description: string;
                 imageAlt: string;
             }>;
+        }>;
+    };
+    palette: {
+        eyebrow: string;
+        title: string;
+        intro: string;
+        colors: Array<{
+            name: string;
+            hex: string;
         }>;
     };
     delivery: {
@@ -61,8 +70,9 @@ export const landingTranslations = {
         brand: "Crochet Makes",
         nav: {
             aboutMe: "About me",
-            customOrder: "Custom",
             catalog: "Catalog",
+            palette: "Palette",
+            customOrder: "Custom",
             delivery: "Delivery",
             contact: "Contact",
         },
@@ -117,8 +127,46 @@ export const landingTranslations = {
                 },
                 {
                     title: "Tops",
-                    products: [],
+                    products: [
+                        {
+                            id: "top-zebra",
+                            title: "Top Zebra",
+                            description: "A handmade crochet top with a clear black-and-white pattern.",
+                            imageAlt: "Top Zebra photo",
+                        },
+                        {
+                            id: "top-browny",
+                            title: "Top Browny",
+                            description: "A warm-toned crochet top for easy summer outfits.",
+                            imageAlt: "Top Browny photo",
+                        },
+                        {
+                            id: "top-gradient",
+                            title: "Top Gradient",
+                            description: "A soft crochet top with a smooth color transition.",
+                            imageAlt: "Top Gradient photo",
+                        },
+                        {
+                            id: "top-flower",
+                            title: "Top Flower",
+                            description: "A light crochet top with a delicate floral mood.",
+                            imageAlt: "Top Flower photo",
+                        },
+                    ],
                 },
+            ],
+        },
+        palette: {
+            eyebrow: "Color palette",
+            title: "Choose the mood of your crochet piece",
+            intro: "Soft neutrals, warm natural tones, and brighter accents can be matched to your idea before I start making the order.",
+            colors: [
+                { name: "Milk", hex: "#f6eee6" },
+                { name: "Powder", hex: "#e8b9c1" },
+                { name: "Cloud blue", hex: "#b9c9d8" },
+                { name: "Sage", hex: "#aebd9a" },
+                { name: "Honey", hex: "#d8a657" },
+                { name: "Cocoa", hex: "#8a6454" },
             ],
         },
         delivery: {
@@ -134,8 +182,9 @@ export const landingTranslations = {
         brand: "Crochet Makes",
         nav: {
             aboutMe: "O mnie",
-            customOrder: "Na zamówienie",
             catalog: "Katalog",
+            palette: "Paleta",
+            customOrder: "Na zamówienie",
             delivery: "Dostawa",
             contact: "Kontakt",
         },
@@ -190,8 +239,46 @@ export const landingTranslations = {
                 },
                 {
                     title: "Topy",
-                    products: [],
+                    products: [
+                        {
+                            id: "top-zebra",
+                            title: "Top Zebra",
+                            description: "Ręcznie szydełkowany top z wyrazistym czarno-białym wzorem.",
+                            imageAlt: "Zdjęcie Top Zebra",
+                        },
+                        {
+                            id: "top-browny",
+                            title: "Top Browny",
+                            description: "Szydełkowany top w ciepłych odcieniach do letnich stylizacji.",
+                            imageAlt: "Zdjęcie Top Browny",
+                        },
+                        {
+                            id: "top-gradient",
+                            title: "Top Gradient",
+                            description: "Miękki szydełkowany top z płynnym przejściem kolorów.",
+                            imageAlt: "Zdjęcie Top Gradient",
+                        },
+                        {
+                            id: "top-flower",
+                            title: "Top Flower",
+                            description: "Lekki szydełkowany top z delikatnym kwiatowym nastrojem.",
+                            imageAlt: "Zdjęcie Top Flower",
+                        },
+                    ],
                 },
+            ],
+        },
+        palette: {
+            eyebrow: "Paleta kolorów",
+            title: "Wybierz nastrój swojej szydełkowanej rzeczy",
+            intro: "Delikatne neutralne odcienie, ciepłe naturalne kolory i jaśniejsze akcenty mogę dopasować do Twojego pomysłu przed rozpoczęciem zamówienia.",
+            colors: [
+                { name: "Milk", hex: "#f6eee6" },
+                { name: "Powder", hex: "#e8b9c1" },
+                { name: "Cloud blue", hex: "#b9c9d8" },
+                { name: "Sage", hex: "#aebd9a" },
+                { name: "Honey", hex: "#d8a657" },
+                { name: "Cocoa", hex: "#8a6454" },
             ],
         },
         delivery: {
@@ -207,8 +294,9 @@ export const landingTranslations = {
         brand: "Crochet Makes",
         nav: {
             aboutMe: "Про мене",
-            customOrder: "На замовлення",
             catalog: "Каталог",
+            palette: "Палітра",
+            customOrder: "На замовлення",
             delivery: "Доставка",
             contact: "Контакти",
         },
@@ -263,8 +351,46 @@ export const landingTranslations = {
                 },
                 {
                     title: "Топи",
-                    products: [],
+                    products: [
+                        {
+                            id: "top-zebra",
+                            title: "Top Zebra",
+                            description: "Топ гачком ручної роботи з виразним чорно-білим візерунком.",
+                            imageAlt: "Фото Top Zebra",
+                        },
+                        {
+                            id: "top-browny",
+                            title: "Top Browny",
+                            description: "Топ гачком у теплих відтінках для літніх образів.",
+                            imageAlt: "Фото Top Browny",
+                        },
+                        {
+                            id: "top-gradient",
+                            title: "Top Gradient",
+                            description: "М'який топ гачком із плавним переходом кольорів.",
+                            imageAlt: "Фото Top Gradient",
+                        },
+                        {
+                            id: "top-flower",
+                            title: "Top Flower",
+                            description: "Легкий топ гачком із ніжним квітковим настроєм.",
+                            imageAlt: "Фото Top Flower",
+                        },
+                    ],
                 },
+            ],
+        },
+        palette: {
+            eyebrow: "Палітра кольорів",
+            title: "Оберіть настрій своєї речі гачком",
+            intro: "М'які нейтральні відтінки, теплі природні кольори та яскравіші акценти можна підібрати під вашу ідею до початку замовлення.",
+            colors: [
+                { name: "Milk", hex: "#f6eee6" },
+                { name: "Powder", hex: "#e8b9c1" },
+                { name: "Cloud blue", hex: "#b9c9d8" },
+                { name: "Sage", hex: "#aebd9a" },
+                { name: "Honey", hex: "#d8a657" },
+                { name: "Cocoa", hex: "#8a6454" },
             ],
         },
         delivery: {
@@ -280,8 +406,9 @@ export const landingTranslations = {
         brand: "Crochet Makes",
         nav: {
             aboutMe: "Обо мне",
-            customOrder: "На заказ",
             catalog: "Каталог",
+            palette: "Палитра",
+            customOrder: "На заказ",
             delivery: "Доставка",
             contact: "Контакты",
         },
@@ -336,8 +463,46 @@ export const landingTranslations = {
                 },
                 {
                     title: "Топы",
-                    products: [],
+                    products: [
+                        {
+                            id: "top-zebra",
+                            title: "Top Zebra",
+                            description: "Топ ручной работы крючком с выразительным черно-белым узором.",
+                            imageAlt: "Фото Top Zebra",
+                        },
+                        {
+                            id: "top-browny",
+                            title: "Top Browny",
+                            description: "Топ крючком в теплых оттенках для летних образов.",
+                            imageAlt: "Фото Top Browny",
+                        },
+                        {
+                            id: "top-gradient",
+                            title: "Top Gradient",
+                            description: "Мягкий топ крючком с плавным переходом цвета.",
+                            imageAlt: "Фото Top Gradient",
+                        },
+                        {
+                            id: "top-flower",
+                            title: "Top Flower",
+                            description: "Легкий топ крючком с нежным цветочным настроением.",
+                            imageAlt: "Фото Top Flower",
+                        },
+                    ],
                 },
+            ],
+        },
+        palette: {
+            eyebrow: "Палитра цветов",
+            title: "Выберите настроение своей вещи крючком",
+            intro: "Мягкие нейтральные оттенки, теплые натуральные цвета и более яркие акценты можно подобрать под вашу идею до начала заказа.",
+            colors: [
+                { name: "Milk", hex: "#f6eee6" },
+                { name: "Powder", hex: "#e8b9c1" },
+                { name: "Cloud blue", hex: "#b9c9d8" },
+                { name: "Sage", hex: "#aebd9a" },
+                { name: "Honey", hex: "#d8a657" },
+                { name: "Cocoa", hex: "#8a6454" },
             ],
         },
         delivery: {
