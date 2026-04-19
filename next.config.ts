@@ -9,6 +9,11 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  experimental: {
+    webpackMemoryOptimizations: true,
+    serverSourceMaps: false,
+  },
+  productionBrowserSourceMaps: false,
 };
 
 export default nextConfig;
