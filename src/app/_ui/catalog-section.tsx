@@ -10,12 +10,33 @@ import type { PublishedCatalogProduct } from "@/src/app/_data/catalog-products";
 import type { CatalogDisplayProduct, CatalogDisplayProductImage } from "@/src/app/_ui/catalog-product-types";
 import type { LandingCatalogGroup, LandingCopy } from "@/src/app/_ui/landing-types";
 
-const catalogProductImages = {
-    "cardigan-cloudy": "/cardigan-cloudy.jpg?v=2",
-    "top-zebra": "/top-zebra.jpg?v=2",
-    "top-browny": "/top-browny.jpg?v=2",
-    "top-gradient": "/top-gradient.jpg?v=2",
-    "top-flower": "/top-flower.jpg?v=2",
+type StaticCatalogProductId = LandingCatalogGroup["products"][number]["id"];
+
+const staticCatalogProductGalleries: Record<StaticCatalogProductId, string[]> = {
+    "cardigan-cloudy": [
+        "/catalog/cardigans/cloudy/cardigan-cloudy.jpg?v=3",
+    ],
+    "top-zebra": [
+        "/catalog/tops/zebra/top-zebra.jpg?v=3",
+        "/catalog/tops/zebra/top-zebra-front-alt.jpg?v=3",
+        "/catalog/tops/zebra/top-zebra-side.jpg?v=3",
+        "/catalog/tops/zebra/top-zebra-back.jpg?v=3",
+    ],
+    "top-browny": [
+        "/catalog/tops/browny/top-browny.jpg?v=3",
+        "/catalog/tops/browny/top-browny-front-alt.jpg?v=3",
+        "/catalog/tops/browny/top-browny-back.jpg?v=3",
+    ],
+    "top-gradient": [
+        "/catalog/tops/gradient/top-gradient.jpg?v=3",
+        "/catalog/tops/gradient/top-gradient-front-alt.jpg?v=3",
+        "/catalog/tops/gradient/top-gradient-back.jpg?v=3",
+    ],
+    "top-flower": [
+        "/catalog/tops/flower/top-flower.jpg?v=3",
+        "/catalog/tops/flower/top-flower-front-alt.jpg?v=3",
+        "/catalog/tops/flower/top-flower-back.jpg?v=3",
+    ],
 };
 
 const catalogPageSize = 4;
@@ -100,16 +121,17 @@ function CatalogProductGroup({
     const [selectedProductId, setSelectedProductId] = useState<string | null>(null);
     const products: CatalogDisplayProduct[] = [
         ...group.products.map((product) => {
-            const imageSrc = catalogProductImages[product.id];
+            const galleryImages = staticCatalogProductGalleries[product.id].map((src, index) => ({
+                id: `${product.id}-${index}`,
+                src,
+                alt: product.imageAlt,
+            }));
+            const imageSrc = galleryImages[0].src;
 
             return {
                 ...product,
                 imageSrc,
-                galleryImages: createProductGallery({
-                    id: `${product.id}-primary`,
-                    src: imageSrc,
-                    alt: product.imageAlt,
-                }),
+                galleryImages: createProductGallery(galleryImages[0], galleryImages.slice(1)),
             };
         }),
         ...databaseProducts

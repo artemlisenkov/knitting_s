@@ -34,8 +34,8 @@ export function CatalogProductDialog({
     return (
         <DialogContent className="h-[calc(100dvh-1rem)] max-h-[860px] max-w-[min(1180px,calc(100vw-1rem))] gap-0 overflow-hidden rounded-md border border-[#d78d98] bg-[#fffaf8] p-0 text-[#2f2a2a] sm:h-[calc(100dvh-2rem)] sm:max-w-[min(1180px,calc(100vw-2rem))]">
             <div className="flex h-full min-h-0 flex-col lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(320px,0.56fr)]">
-                <div className="flex min-h-0 flex-1 flex-col gap-3 bg-white p-3 sm:p-4 lg:grid lg:grid-cols-[4.5rem_minmax(0,1fr)]">
-                    <div className="relative min-h-[280px] flex-1 overflow-hidden rounded-md bg-[#f8eef0] lg:order-2 lg:min-h-0">
+                <div className="grid min-h-0 flex-1 grid-cols-[4.25rem_minmax(0,1fr)] gap-3 bg-white p-3 sm:grid-cols-[5rem_minmax(0,1fr)] sm:p-4 lg:grid-cols-[4.5rem_minmax(0,1fr)]">
+                    <div className="group/photo relative order-2 min-h-[280px] overflow-hidden rounded-md bg-[#f8eef0] lg:min-h-0">
                         {selectedImage ? (
                             <Image
                                 src={selectedImage.src}
@@ -51,33 +51,37 @@ export function CatalogProductDialog({
                             <>
                                 <Button
                                     type="button"
-                                    size="icon"
-                                    className="absolute left-3 top-1/2 size-10 -translate-y-1/2 rounded-full bg-white/85 text-[#2c2426] shadow-md hover:bg-white hover:text-[#994d59]"
+                                    variant="ghost"
+                                    className="absolute inset-y-0 left-0 h-full w-[32%] !translate-y-0 rounded-none bg-transparent px-0 text-white opacity-100 transition-opacity duration-150 hover:bg-transparent focus-visible:opacity-100 sm:opacity-0 sm:group-hover/photo:opacity-100"
                                     aria-label={`Previous ${product.title} image`}
                                     onClick={showPreviousImage}
                                 >
-                                    <ChevronLeftIcon />
+                                    <span className="flex size-10 items-center justify-center rounded-full bg-[#4a4a4a]/35 shadow-sm backdrop-blur-sm transition-colors group-hover/button:bg-[#4a4a4a]/45">
+                                        <ChevronLeftIcon />
+                                    </span>
                                 </Button>
                                 <Button
                                     type="button"
-                                    size="icon"
-                                    className="absolute right-3 top-1/2 size-10 -translate-y-1/2 rounded-full bg-white/85 text-[#2c2426] shadow-md hover:bg-white hover:text-[#994d59]"
+                                    variant="ghost"
+                                    className="absolute inset-y-0 right-0 h-full w-[32%] !translate-y-0 rounded-none bg-transparent px-0 text-white opacity-100 transition-opacity duration-150 hover:bg-transparent focus-visible:opacity-100 sm:opacity-0 sm:group-hover/photo:opacity-100"
                                     aria-label={`Next ${product.title} image`}
                                     onClick={showNextImage}
                                 >
-                                    <ChevronRightIcon />
+                                    <span className="flex size-10 items-center justify-center rounded-full bg-[#4a4a4a]/35 shadow-sm backdrop-blur-sm transition-colors group-hover/button:bg-[#4a4a4a]/45">
+                                        <ChevronRightIcon />
+                                    </span>
                                 </Button>
                             </>
                         ) : null}
                     </div>
 
-                    <div className="flex h-20 shrink-0 gap-2 overflow-x-auto pb-1 lg:order-1 lg:h-full lg:flex-col lg:overflow-x-hidden lg:overflow-y-auto lg:pb-0 lg:pr-1">
+                    <div className="order-1 flex min-h-0 flex-col gap-2 overflow-y-auto pr-1">
                         {product.galleryImages.map((image, index) => (
                             <button
                                 key={image.id}
                                 type="button"
                                 className={cn(
-                                    "relative h-20 w-16 shrink-0 overflow-hidden rounded-md border bg-white outline-none transition-all focus-visible:ring-2 focus-visible:ring-[#994d59] lg:h-24 lg:w-full",
+                                    "relative h-20 w-full shrink-0 overflow-hidden rounded-md border bg-white outline-none transition-all focus-visible:ring-2 focus-visible:ring-[#994d59] sm:h-24",
                                     selectedImageIndex === index
                                         ? "border-[#994d59] ring-2 ring-[#994d59]/25"
                                         : "border-[#ead0d4] hover:border-[#d88c98]"
@@ -93,6 +97,13 @@ export function CatalogProductDialog({
                                     sizes="72px"
                                     unoptimized
                                     className="h-full w-full object-cover"
+                                />
+                                <span
+                                    className={cn(
+                                        "absolute inset-0 bg-black/30 transition-opacity",
+                                        selectedImageIndex === index ? "opacity-0" : "opacity-100"
+                                    )}
+                                    aria-hidden="true"
                                 />
                             </button>
                         ))}
