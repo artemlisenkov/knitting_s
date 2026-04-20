@@ -43,6 +43,13 @@
       "when": 1776614000292,
       "tag": "0005_common_pixie",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1776709792389,
+      "tag": "0006_late_joseph",
+      "breakpoints": true
     }
   ]
 }

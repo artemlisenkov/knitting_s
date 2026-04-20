@@ -1,16 +1,22 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useSyncExternalStore } from "react";
 import { TRPCReactProvider } from "@/src/trpc/client/createIndex";
 
 interface ProviderProps {
     children: React.ReactNode;
 }
 
-export const Provider = ({ children }: ProviderProps) => {
-    const [isMounted, setIsMounted] = useState(false);
+const subscribeToMount = () => () => undefined;
+const getClientMountSnapshot = () => true;
+const getServerMountSnapshot = () => false;
 
-    useEffect(() => { setIsMounted(true); }, []);
+export const Provider = ({ children }: ProviderProps) => {
+    const isMounted = useSyncExternalStore(
+        subscribeToMount,
+        getClientMountSnapshot,
+        getServerMountSnapshot
+    );
 
     if(!isMounted) return null
 

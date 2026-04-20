@@ -63,3 +63,15 @@ export const catalogProduct = pgTable("catalog_product", {
     index("catalog_product_category_sort_idx").on(table.category, table.sortOrder),
     index("catalog_product_published_idx").on(table.isPublished),
 ]);
+
+export const catalogProductImage = pgTable("catalog_product_image", {
+    id: text("id").primaryKey(),
+    productId: text("product_id").notNull().references(() => catalogProduct.id, { onDelete: "cascade" }),
+    imagePath: text("image_path").notNull(),
+    imageAlt: text("image_alt"),
+    sortOrder: integer("sort_order").notNull().default(0),
+    createdAt: timestamp("created_at", { precision: 6, withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { precision: 6, withTimezone: true }).notNull().defaultNow(),
+}, (table) => [
+    index("catalog_product_image_product_sort_idx").on(table.productId, table.sortOrder),
+]);
