@@ -1,3 +1,5 @@
+import {static_products} from "@/public/catalog/catalog.types";
+
 export type LandingLanguage = "pl" | "en" | "uk" | "ru";
 
 export const landingLanguages: Array<{
@@ -13,7 +15,7 @@ export const landingLanguages: Array<{
 
 type LandingTranslation = {
     brand: string;
-    nav: Record<"aboutMe" | "catalog" | "palette" | "customOrder" | "delivery" | "contact", string>;
+    nav: Record<"aboutMe" | "catalog" | "palette" | "customOrder" | "contactDelivery", string>;
     aboutMe: {
         eyebrow: string;
         title: string;
@@ -43,7 +45,7 @@ type LandingTranslation = {
             id: "cardigans" | "tops";
             title: string;
             products: Array<{
-                id: "cardigan-cloudy" | "top-zebra" | "top-gradient" | "top-flower" | "top-browny";
+                id: static_products;
                 title: string;
                 description: string;
                 imageAlt: string;
@@ -59,13 +61,14 @@ type LandingTranslation = {
             hex: string;
         }>;
     };
-    delivery: {
+    contactDelivery: {
         eyebrow: string;
         title: string;
-    };
-    contact: {
-        eyebrow: string;
-        title: string;
+        intro: string;
+        instagramLabel: string;
+        instagramHref: string;
+        telegramLabel: string;
+        telegramHref: string;
     };
 };
 
@@ -77,8 +80,7 @@ export const landingTranslations = {
             catalog: "Catalog",
             palette: "Palette",
             customOrder: "Custom",
-            delivery: "Delivery",
-            contact: "Contact",
+            contactDelivery: "Contact",
         },
         aboutMe: {
             eyebrow: "Your uniqueness starts here",
@@ -127,9 +129,15 @@ export const landingTranslations = {
                     products: [
                         {
                             id: "cardigan-cloudy",
-                            title: "Cardigan Cloudy",
+                            title: "Cardigan Unisex",
                             description: "A soft crochet cardigan with an airy texture and an easy layered fit.",
-                            imageAlt: "Cardigan Cloudy photo",
+                            imageAlt: "Cardigan Unisex photo",
+                        },
+                        {
+                            id: "cardigan-sunflower",
+                            title: "Cardigan Sunflower",
+                            description: "A crochet cardigan with a bold black-and-yellow sunflower pattern.",
+                            imageAlt: "Cardigan Sunflower photo",
                         },
                     ],
                 },
@@ -178,13 +186,14 @@ export const landingTranslations = {
                 { name: "Cocoa", hex: "#8a6454" },
             ],
         },
-        delivery: {
-            eyebrow: "Delivery",
-            title: "Shipping and payment details",
-        },
-        contact: {
+        contactDelivery: {
             eyebrow: "Contact",
-            title: "Social links and contact details",
+            title: "Let's discuss your order",
+            intro: "Write to me in direct messages through Instagram or Telegram, and we can discuss your piece, measurements, colors, and all the details.",
+            instagramLabel: "Instagram",
+            instagramHref: "https://www.instagram.com/ktrn._.mlnk/",
+            telegramLabel: "Telegram",
+            telegramHref: "https://t.me/ktrnmlnk",
         },
     },
     pl: {
@@ -194,8 +203,7 @@ export const landingTranslations = {
             catalog: "Katalog",
             palette: "Paleta",
             customOrder: "Na zamówienie",
-            delivery: "Dostawa",
-            contact: "Kontakt",
+            contactDelivery: "Kontakt",
         },
         aboutMe: {
             eyebrow: "Twoja wyjątkowość zaczyna się tutaj",
@@ -244,9 +252,15 @@ export const landingTranslations = {
                     products: [
                         {
                             id: "cardigan-cloudy",
-                            title: "Cardigan Cloudy",
+                            title: "Cardigan Unisex",
                             description: "Miękki szydełkowany kardigan o lekkiej fakturze i swobodnej warstwowej formie.",
-                            imageAlt: "Zdjęcie Cardigan Cloudy",
+                            imageAlt: "Zdjęcie Cardigan Unisex",
+                        },
+                        {
+                            id: "cardigan-sunflower",
+                            title: "Cardigan Sunflower",
+                            description: "Szydełkowany kardigan z wyrazistym czarno-żółtym wzorem słoneczników.",
+                            imageAlt: "Zdjęcie Cardigan Sunflower",
                         },
                     ],
                 },
@@ -295,13 +309,14 @@ export const landingTranslations = {
                 { name: "Cocoa", hex: "#8a6454" },
             ],
         },
-        delivery: {
-            eyebrow: "Dostawa",
-            title: "Szczegóły dostawy i płatności",
-        },
-        contact: {
+        contactDelivery: {
             eyebrow: "Kontakt",
-            title: "Linki społecznościowe i dane kontaktowe",
+            title: "Porozmawiajmy o Twoim zamówieniu",
+            intro: "Napisz do mnie w wiadomości prywatnej przez Instagram lub Telegram, a omówimy Twoją rzecz, wymiary, kolory i wszystkie szczegóły.",
+            instagramLabel: "Instagram",
+            instagramHref: "https://www.instagram.com/ktrn._.mlnk/",
+            telegramLabel: "Telegram",
+            telegramHref: "https://t.me/ktrnmlnk",
         },
     },
     uk: {
@@ -311,8 +326,7 @@ export const landingTranslations = {
             catalog: "Каталог",
             palette: "Палітра",
             customOrder: "На замовлення",
-            delivery: "Доставка",
-            contact: "Контакти",
+            contactDelivery: "Контакти",
         },
         aboutMe: {
             eyebrow: "Твоя унікальність починається тут",
@@ -361,9 +375,15 @@ export const landingTranslations = {
                     products: [
                         {
                             id: "cardigan-cloudy",
-                            title: "Cardigan Cloudy",
+                            title: "Cardigan Unisex",
                             description: "М'який кардиган гачком із легкою фактурою та зручною посадкою для шарів.",
-                            imageAlt: "Фото Cardigan Cloudy",
+                            imageAlt: "Фото Cardigan Unisex",
+                        },
+                        {
+                            id: "cardigan-sunflower",
+                            title: "Cardigan Sunflower",
+                            description: "Кардиган гачком із виразним чорно-жовтим візерунком соняшників.",
+                            imageAlt: "Фото Cardigan Sunflower",
                         },
                     ],
                 },
@@ -412,13 +432,14 @@ export const landingTranslations = {
                 { name: "Cocoa", hex: "#8a6454" },
             ],
         },
-        delivery: {
-            eyebrow: "Доставка",
-            title: "Деталі доставки та оплати",
-        },
-        contact: {
+        contactDelivery: {
             eyebrow: "Контакти",
-            title: "Соціальні мережі та контактна інформація",
+            title: "Давайте обговоримо ваше замовлення",
+            intro: "Напишіть мені в приватні повідомлення через Instagram або Telegram, і ми обговоримо вашу річ, мірки, кольори та всі деталі.",
+            instagramLabel: "Instagram",
+            instagramHref: "https://www.instagram.com/ktrn._.mlnk/",
+            telegramLabel: "Telegram",
+            telegramHref: "https://t.me/ktrnmlnk",
         },
     },
     ru: {
@@ -428,8 +449,7 @@ export const landingTranslations = {
             catalog: "Каталог",
             palette: "Палитра",
             customOrder: "На заказ",
-            delivery: "Доставка",
-            contact: "Контакты",
+            contactDelivery: "Контакты",
         },
         aboutMe: {
             eyebrow: "Твоя уникальность начинается здесь",
@@ -478,9 +498,15 @@ export const landingTranslations = {
                     products: [
                         {
                             id: "cardigan-cloudy",
-                            title: "Cardigan Cloudy",
+                            title: "Cardigan Unisex",
                             description: "Мягкий кардиган крючком с воздушной фактурой и удобной посадкой для многослойных образов.",
-                            imageAlt: "Фото Cardigan Cloudy",
+                            imageAlt: "Фото Cardigan Unisex",
+                        },
+                        {
+                            id: "cardigan-sunflower",
+                            title: "Cardigan Sunflower",
+                            description: "Кардиган крючком с выразительным черно-желтым узором подсолнухов.",
+                            imageAlt: "Фото Cardigan Sunflower",
                         },
                     ],
                 },
@@ -529,13 +555,14 @@ export const landingTranslations = {
                 { name: "Cocoa", hex: "#8a6454" },
             ],
         },
-        delivery: {
-            eyebrow: "Доставка",
-            title: "Детали доставки и оплаты",
-        },
-        contact: {
+        contactDelivery: {
             eyebrow: "Контакты",
-            title: "Социальные сети и контактная информация",
+            title: "Давайте обсудим ваш заказ",
+            intro: "Напишите мне в личные сообщения через Instagram или Telegram, и мы обсудим вашу вещь, мерки, цвета и все детали.",
+            instagramLabel: "Instagram",
+            instagramHref: "https://www.instagram.com/ktrn._.mlnk/",
+            telegramLabel: "Telegram",
+            telegramHref: "https://t.me/ktrnmlnk",
         },
     },
 } satisfies Record<LandingLanguage, LandingTranslation>;

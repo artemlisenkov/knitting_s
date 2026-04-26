@@ -7,8 +7,10 @@ import type { LandingCopy } from "@/src/app/_ui/landing-types";
 
 export function AboutSection({
     aboutMe,
+    secondaryActionHref = "#contactDelivery",
 }: {
     aboutMe: LandingCopy["aboutMe"];
+    secondaryActionHref?: string;
 }) {
     return (
         <section id="aboutMe" className="mx-auto grid min-h-[calc(100vh-3rem)] scroll-mt-16 w-full max-w-6xl items-center gap-8 px-4 py-10 sm:px-6 lg:grid-cols-[1.06fr_0.94fr] lg:py-14">
@@ -38,7 +40,7 @@ export function AboutSection({
                         {aboutMe.primaryAction}
                     </a>
                     <a
-                        href="#contact"
+                        href={secondaryActionHref}
                         className={cn(
                             buttonVariants({ variant: "outline" }),
                             "border-[#d9a0a8] bg-white/45 px-5 text-[#6c3f46] hover:-translate-y-0.5 hover:rounded-lg hover:border-[#b05b66] hover:bg-white hover:text-[#994d59] hover:shadow-md"

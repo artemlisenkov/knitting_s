@@ -4,6 +4,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { AboutSection } from "@/src/app/_ui/about-section";
 import { CatalogSection } from "@/src/app/_ui/catalog-section";
+import { ContactDeliverySection } from "@/src/app/_ui/contact-delivery-section";
 import { CustomOrderSection } from "@/src/app/_ui/custom-order-section";
 import {
     DevViewportSwitch,
@@ -15,7 +16,6 @@ import {
     type LandingLanguage,
 } from "@/src/app/_ui/landing-translations";
 import { PaletteSection } from "@/src/app/_ui/palette-section";
-import { SimpleLandingSection } from "@/src/app/_ui/simple-landing-section";
 import type { PublishedCatalogProduct } from "@/src/app/_data/catalog-products";
 
 export const LandingPageContents = ({
@@ -65,8 +65,7 @@ export const LandingPageContents = ({
         { label: translation.nav.catalog, href: "#catalog" },
         { label: translation.nav.palette, href: "#palette" },
         { label: translation.nav.customOrder, href: "#customOrder" },
-        { label: translation.nav.delivery, href: "#delivery" },
-        { label: translation.nav.contact, href: "#contact" },
+        { label: translation.nav.contactDelivery, href: "#contactDelivery" },
     ];
 
     if (canUseDevPreview && devPreviewMode === "phone") {
@@ -105,7 +104,7 @@ export const LandingPageContents = ({
                     </div>
                 ) : null}
 
-                <AboutSection aboutMe={translation.aboutMe} />
+                <AboutSection aboutMe={translation.aboutMe} secondaryActionHref="#contactDelivery" />
 
                 <CatalogSection
                     catalog={translation.catalog}
@@ -119,18 +118,7 @@ export const LandingPageContents = ({
 
                 <CustomOrderSection customOrder={translation.customOrder} />
 
-                <SimpleLandingSection
-                    id="delivery"
-                    eyebrow={translation.delivery.eyebrow}
-                    title={translation.delivery.title}
-                    bordered
-                />
-
-                <SimpleLandingSection
-                    id="contact"
-                    eyebrow={translation.contact.eyebrow}
-                    title={translation.contact.title}
-                />
+                <ContactDeliverySection contactDelivery={translation.contactDelivery} />
             </main>
         </div>
     );

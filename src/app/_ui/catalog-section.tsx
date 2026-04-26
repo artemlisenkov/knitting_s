@@ -16,6 +16,12 @@ const staticCatalogProductGalleries: Record<StaticCatalogProductId, string[]> = 
     "cardigan-cloudy": [
         "/catalog/cardigans/cloudy/cardigan-cloudy.jpg?v=3",
     ],
+    "cardigan-sunflower": [
+      "/catalog/cardigans/sunflower/cardigan-sunflower.jpg?v=3",
+      "/catalog/cardigans/sunflower/cardigan-sunflower-side.jpg?v=3",
+      "/catalog/cardigans/sunflower/cardigan-sunflower-back-alt.jpg?v=3",
+      "/catalog/cardigans/sunflower/cardigan-sunflower-back.jpg?v=3"
+    ],
     "top-zebra": [
         "/catalog/tops/zebra/top-zebra.jpg?v=3",
         "/catalog/tops/zebra/top-zebra-front-alt.jpg?v=3",

@@ -8,7 +8,7 @@ export function PaletteSection({
     palette: LandingCopy["palette"];
 }) {
     return (
-        <section id="palette" className="scroll-mt-16 border-y border-[#ead0d4] bg-white/50 px-4 py-16 sm:px-6">
+        <section id="palette" className="scroll-mt-0 border-y border-[#ead0d4] bg-white/50 px-4 py-16 sm:px-6">
             <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
                 <div>
                     <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#994d59]">
