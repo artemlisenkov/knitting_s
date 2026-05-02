@@ -9,7 +9,7 @@ export function CustomOrderSection({
     customOrder: LandingCopy["customOrder"];
 }) {
     return (
-        <section id="customOrder" className="scroll-mt-16 px-4 py-16 sm:px-6">
+        <section id="customOrder" className="scroll-mt-16 px-4 py-14 sm:px-6">
             <div className="mx-auto max-w-6xl">
                 <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
                     <div className="rounded-md border border-[#d78d98] bg-[#fffaf8] p-6 shadow-[10px_10px_0_rgba(176,91,102,0.14)] sm:p-8">

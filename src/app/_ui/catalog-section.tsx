@@ -14,37 +14,39 @@ type StaticCatalogProductId = LandingCatalogGroup["products"][number]["id"];
 
 const staticCatalogProductGalleries: Record<StaticCatalogProductId, string[]> = {
     "cardigan-cloudy": [
-        "/catalog/cardigans/unisex/cardigan-unisex.jpg?v=4",
-        "/catalog/cardigans/unisex/cardigan-unisex-front-alt.jpg?v=4",
-        "/catalog/cardigans/unisex/cardigan-unisex-side.jpg?v=4",
-        "/catalog/cardigans/unisex/cardigan-unisex-back.jpg?v=4",
+        "/catalog/cardigans/unisex/cardigan-unisex.jpg?v=5",
+        "/catalog/cardigans/unisex/cardigan-unisex-front-alt.jpg?v=5",
+        "/catalog/cardigans/unisex/cardigan-unisex-side.jpg?v=5",
+        "/catalog/cardigans/unisex/cardigan-unisex-back.jpg?v=5",
     ],
     "cardigan-sunflower": [
-        "/catalog/cardigans/sunflower/cardigan-sunflower.jpg?v=4",
-        "/catalog/cardigans/sunflower/cardigan-sunflower-side.jpg?v=4",
-        "/catalog/cardigans/sunflower/cardigan-sunflower-back-alt.jpg?v=4",
-        "/catalog/cardigans/sunflower/cardigan-sunflower-back.jpg?v=4",
+        "/catalog/cardigans/sunflower/cardigan-sunflower.jpg?v=5",
+        "/catalog/cardigans/sunflower/cardigan-sunflower-side.jpg?v=5",
+        "/catalog/cardigans/sunflower/cardigan-sunflower-back-alt.jpg?v=5",
+        "/catalog/cardigans/sunflower/cardigan-sunflower-back.jpg?v=5",
     ],
     "top-zebra": [
-        "/catalog/tops/zebra/top-zebra.jpg?v=4",
-        "/catalog/tops/zebra/top-zebra-front-alt.jpg?v=4",
-        "/catalog/tops/zebra/top-zebra-side.jpg?v=4",
-        "/catalog/tops/zebra/top-zebra-back.jpg?v=4",
+        "/catalog/tops/zebra/top-zebra.jpg?v=5",
+        "/catalog/tops/zebra/top-zebra-alt.jpg?v=5",
+        "/catalog/tops/zebra/top-zebra-back.jpg?v=5",
     ],
     "top-browny": [
-        "/catalog/tops/browny/top-browny.jpg?v=4",
-        "/catalog/tops/browny/top-browny-front-alt.jpg?v=4",
-        "/catalog/tops/browny/top-browny-back.jpg?v=4",
+        "/catalog/tops/browny/top-browny.jpg?v=5",
+        "/catalog/tops/browny/top-browny-side.jpg?v=5",
+        "/catalog/tops/browny/top-browny-back.jpg?v=5",
     ],
     "top-gradient": [
-        "/catalog/tops/gradient/top-gradient.jpg?v=4",
-        "/catalog/tops/gradient/top-gradient-front-alt.jpg?v=4",
-        "/catalog/tops/gradient/top-gradient-back.jpg?v=4",
+        "/catalog/tops/gradient/top-gradient.jpg?v=5",
+        "/catalog/tops/gradient/top-gradient-alt.jpg?v=5",
+        "/catalog/tops/gradient/top-gradient-back.jpg?v=5",
+        "/catalog/tops/gradient/top-gradient-back-alt.jpg?v=5",
+        "/catalog/tops/gradient/top-gradient-side.jpg?v=5",
+        "/catalog/tops/gradient/top-gradient-side-alt.jpg?v=5",
     ],
     "top-flower": [
-        "/catalog/tops/flower/top-flower.jpg?v=4",
-        "/catalog/tops/flower/top-flower-front-alt.jpg?v=4",
-        "/catalog/tops/flower/top-flower-back.jpg?v=4",
+        "/catalog/tops/flower/top-flower.jpg?v=5",
+        "/catalog/tops/flower/top-flower-front-alt.jpg?v=5",
+        "/catalog/tops/flower/top-flower-back.jpg?v=5",
     ],
 };
 
@@ -78,7 +80,7 @@ export function CatalogSection({
     isAdminView: boolean;
 }) {
     return (
-        <section ref={catalogRef} id="catalog" className="scroll-mt-16 px-4 py-16 sm:px-6">
+        <section ref={catalogRef} id="catalog" className="scroll-mt-16 px-4 pt-10 pb-14 sm:px-6">
             <div className="mx-auto max-w-6xl">
                 <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#994d59]">
                     {catalog.eyebrow}

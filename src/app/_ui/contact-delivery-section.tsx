@@ -9,7 +9,7 @@ export function ContactDeliverySection({
     contactDelivery: LandingCopy["contactDelivery"];
 }) {
     return (
-        <section id="contactDelivery" className="scroll-mt-16 border-y border-[#ead0d4] bg-white/50 px-4 py-16 sm:px-6">
+        <section id="contactDelivery" className="scroll-mt-16 px-4 py-14 sm:px-6">
             <div className="mx-auto max-w-3xl text-center">
                 <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#994d59]">
                     {contactDelivery.eyebrow}

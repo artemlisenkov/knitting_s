@@ -15,6 +15,7 @@ import {
     landingTranslations,
     type LandingLanguage,
 } from "@/src/app/_ui/landing-translations";
+import { MeasurementsSection } from "@/src/app/_ui/measurements-section";
 import { PaletteSection } from "@/src/app/_ui/palette-section";
 import type { PublishedCatalogProduct } from "@/src/app/_data/catalog-products";
 
@@ -65,6 +66,7 @@ export const LandingPageContents = ({
         { label: translation.nav.catalog, href: "#catalog" },
         { label: translation.nav.palette, href: "#palette" },
         { label: translation.nav.customOrder, href: "#customOrder" },
+        { label: translation.nav.measurements, href: "#measurements" },
         { label: translation.nav.contactDelivery, href: "#contactDelivery" },
     ];
 
@@ -117,6 +119,8 @@ export const LandingPageContents = ({
                 <PaletteSection palette={translation.palette} />
 
                 <CustomOrderSection customOrder={translation.customOrder} />
+
+                <MeasurementsSection measurements={translation.measurements} />
 
                 <ContactDeliverySection contactDelivery={translation.contactDelivery} />
             </main>

@@ -16,7 +16,7 @@ export const landingLanguages: Array<{
 
 type LandingTranslation = {
     brand: string;
-    nav: Record<"aboutMe" | "catalog" | "palette" | "customOrder" | "contactDelivery", string>;
+    nav: Record<"aboutMe" | "catalog" | "palette" | "customOrder" | "measurements" | "contactDelivery", string>;
     aboutMe: {
         eyebrow: string;
         title: string;
@@ -59,6 +59,15 @@ type LandingTranslation = {
         intro: string;
         colors: PaletteColor[];
     };
+    measurements: {
+        title: string;
+        imageAlt: string;
+        items: Array<{
+            title: string;
+            description: string;
+            hint: string;
+        }>;
+    };
     contactDelivery: {
         eyebrow: string;
         title: string;
@@ -78,6 +87,7 @@ export const landingTranslations = {
             catalog: "Catalog",
             palette: "Palette",
             customOrder: "Custom",
+            measurements: "Measurements",
             contactDelivery: "Contact",
         },
         aboutMe: {
@@ -177,6 +187,27 @@ export const landingTranslations = {
             intro: "You can choose any colors and any color combinations for any piece, so the final crochet item matches exactly what you have in mind.",
             colors: babyCottonPaletteColors,
         },
+        measurements: {
+            title: "HOW TO MEASURE YOUR BODY",
+            imageAlt: "Body measurements guide",
+            items: [
+                {
+                    title: "BUST",
+                    description: "Measure around the fullest part of your bust.",
+                    hint: "Keep the measuring tape level and comfortably snug.",
+                },
+                {
+                    title: "UNDERBUST",
+                    description: "Measure directly under your bust, where the band of a bra usually sits.",
+                    hint: "The tape should be straight and firm.",
+                },
+                {
+                    title: "WAIST",
+                    description: "Measure around the narrowest part of your waist.",
+                    hint: "This is usually slightly above your belly button.",
+                },
+            ],
+        },
         contactDelivery: {
             eyebrow: "Contact",
             title: "Let's discuss your order",
@@ -194,6 +225,7 @@ export const landingTranslations = {
             catalog: "Katalog",
             palette: "Paleta",
             customOrder: "Na zamówienie",
+            measurements: "Pomiary",
             contactDelivery: "Kontakt",
         },
         aboutMe: {
@@ -293,6 +325,27 @@ export const landingTranslations = {
             intro: "Możesz wybrać dowolne kolory i dowolne ich połączenia do każdej rzeczy, tak aby gotowy szydełkowany projekt dokładnie odpowiadał Twojemu pomysłowi.",
             colors: babyCottonPaletteColors,
         },
+        measurements: {
+            title: "JAK ZMIERZYĆ CIAŁO",
+            imageAlt: "Przewodnik po mierzeniu ciała",
+            items: [
+                {
+                    title: "BIUST",
+                    description: "Zmierz obwód w najszerszym miejscu biustu.",
+                    hint: "Taśma powinna być ułożona równo i przylegać komfortowo.",
+                },
+                {
+                    title: "POD BIUSTEM",
+                    description: "Zmierz bezpośrednio pod biustem, tam gdzie znajduje się pasek stanika.",
+                    hint: "Taśma powinna być prosta i dobrze dopasowana.",
+                },
+                {
+                    title: "TALIA",
+                    description: "Zmierz obwód w najwęższym miejscu talii.",
+                    hint: "Zwykle jest to nieco powyżej pępka.",
+                },
+            ],
+        },
         contactDelivery: {
             eyebrow: "Kontakt",
             title: "Porozmawiajmy o Twoim zamówieniu",
@@ -310,6 +363,7 @@ export const landingTranslations = {
             catalog: "Каталог",
             palette: "Палітра",
             customOrder: "На замовлення",
+            measurements: "Мірки",
             contactDelivery: "Контакти",
         },
         aboutMe: {
@@ -409,6 +463,27 @@ export const landingTranslations = {
             intro: "Ви можете обрати будь-які кольори та будь-які їх поєднання для будь-якої речі, щоб готовий виріб гачком точно відповідав вашій задумці.",
             colors: babyCottonPaletteColors,
         },
+        measurements: {
+            title: "ЯК ЗНЯТИ МІРКИ З ТІЛА",
+            imageAlt: "Пояснення як зняти мірки з тіла",
+            items: [
+                {
+                    title: "ОБХВАТ ГРУДЕЙ",
+                    description: "Виміряйте по найширшій частині грудей.",
+                    hint: "Сантиметр має бути рівно розташований і щільно прилягати.",
+                },
+                {
+                    title: "ПІД ГРУДЬМИ",
+                    description: "Виміряйте безпосередньо під грудьми, там де проходить пояс бюстгальтера.",
+                    hint: "Стрічка має бути рівною та добре прилягати.",
+                },
+                {
+                    title: "ТАЛІЯ",
+                    description: "Виміряйте обхват у найвужчій частині талії.",
+                    hint: "Зазвичай це трохи вище пупка.",
+                },
+            ],
+        },
         contactDelivery: {
             eyebrow: "Контакти",
             title: "Давайте обговоримо ваше замовлення",
@@ -426,6 +501,7 @@ export const landingTranslations = {
             catalog: "Каталог",
             palette: "Палитра",
             customOrder: "На заказ",
+            measurements: "Мерки",
             contactDelivery: "Контакты",
         },
         aboutMe: {
@@ -524,6 +600,27 @@ export const landingTranslations = {
             title: "Выберите настроение своей вещи крючком",
             intro: "Вы можете выбрать любые цвета и любые их сочетания для любой вещи, чтобы готовое изделие крючком точно соответствовало вашей задумке.",
             colors: babyCottonPaletteColors,
+        },
+        measurements: {
+            title: "КАК СНЯТЬ МЕРКИ",
+            imageAlt: "Инструкция по снятию мерок",
+            items: [
+                {
+                    title: "ГРУДЬ",
+                    description: "Измерьте по самой выступающей части груди.",
+                    hint: "Сантиметровая лента должна проходить ровно и плотно прилегать, но не сдавливать.",
+                },
+                {
+                    title: "ПОД ГРУДЬЮ",
+                    description: "Измерьте непосредственно под грудью, там где проходит пояс бюстгальтера.",
+                    hint: "Лента должна быть ровной и хорошо прилегать.",
+                },
+                {
+                    title: "ТАЛИЯ",
+                    description: "Измерьте по самой узкой части талии.",
+                    hint: "Обычно она находится немного выше пупка.",
+                },
+            ],
         },
         contactDelivery: {
             eyebrow: "Контакты",
