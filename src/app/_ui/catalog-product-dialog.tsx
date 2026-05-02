@@ -52,7 +52,7 @@ export function CatalogProductDialog({
                                 <Button
                                     type="button"
                                     variant="ghost"
-                                    className="absolute inset-y-0 left-0 h-full w-[32%] !translate-y-0 rounded-none bg-transparent px-0 text-white opacity-100 transition-opacity duration-150 hover:bg-transparent focus-visible:opacity-100 sm:opacity-0 sm:group-hover/photo:opacity-100"
+                                    className="absolute inset-y-0 left-0 h-full w-14 !translate-y-0 justify-start rounded-none bg-transparent px-2 text-white opacity-100 transition-opacity duration-150 hover:bg-transparent focus-visible:opacity-100 sm:opacity-0 sm:group-hover/photo:opacity-100"
                                     aria-label={`Previous ${product.title} image`}
                                     onClick={showPreviousImage}
                                 >
@@ -63,7 +63,7 @@ export function CatalogProductDialog({
                                 <Button
                                     type="button"
                                     variant="ghost"
-                                    className="absolute inset-y-0 right-0 h-full w-[32%] !translate-y-0 rounded-none bg-transparent px-0 text-white opacity-100 transition-opacity duration-150 hover:bg-transparent focus-visible:opacity-100 sm:opacity-0 sm:group-hover/photo:opacity-100"
+                                    className="absolute inset-y-0 right-0 h-full w-14 !translate-y-0 justify-end rounded-none bg-transparent px-2 text-white opacity-100 transition-opacity duration-150 hover:bg-transparent focus-visible:opacity-100 sm:opacity-0 sm:group-hover/photo:opacity-100"
                                     aria-label={`Next ${product.title} image`}
                                     onClick={showNextImage}
                                 >

@@ -61,7 +61,7 @@ export function AboutSection({
                             sizes="(min-width: 1024px) 420px, 100vw"
                             priority
                             unoptimized
-                            className="h-full w-full object-cover transition-opacity"
+                            className="h-full w-full scale-[1.08] object-cover object-[62%_center] transition-opacity lg:scale-[1.12]"
                         />
                     </div>
                     <div className="px-1 pb-2 pt-5 text-left">

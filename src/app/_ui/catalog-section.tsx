@@ -14,34 +14,37 @@ type StaticCatalogProductId = LandingCatalogGroup["products"][number]["id"];
 
 const staticCatalogProductGalleries: Record<StaticCatalogProductId, string[]> = {
     "cardigan-cloudy": [
-        "/catalog/cardigans/cloudy/cardigan-cloudy.jpg?v=3",
+        "/catalog/cardigans/unisex/cardigan-unisex.jpg?v=4",
+        "/catalog/cardigans/unisex/cardigan-unisex-front-alt.jpg?v=4",
+        "/catalog/cardigans/unisex/cardigan-unisex-side.jpg?v=4",
+        "/catalog/cardigans/unisex/cardigan-unisex-back.jpg?v=4",
     ],
     "cardigan-sunflower": [
-      "/catalog/cardigans/sunflower/cardigan-sunflower.jpg?v=3",
-      "/catalog/cardigans/sunflower/cardigan-sunflower-side.jpg?v=3",
-      "/catalog/cardigans/sunflower/cardigan-sunflower-back-alt.jpg?v=3",
-      "/catalog/cardigans/sunflower/cardigan-sunflower-back.jpg?v=3"
+        "/catalog/cardigans/sunflower/cardigan-sunflower.jpg?v=4",
+        "/catalog/cardigans/sunflower/cardigan-sunflower-side.jpg?v=4",
+        "/catalog/cardigans/sunflower/cardigan-sunflower-back-alt.jpg?v=4",
+        "/catalog/cardigans/sunflower/cardigan-sunflower-back.jpg?v=4",
     ],
     "top-zebra": [
-        "/catalog/tops/zebra/top-zebra.jpg?v=3",
-        "/catalog/tops/zebra/top-zebra-front-alt.jpg?v=3",
-        "/catalog/tops/zebra/top-zebra-side.jpg?v=3",
-        "/catalog/tops/zebra/top-zebra-back.jpg?v=3",
+        "/catalog/tops/zebra/top-zebra.jpg?v=4",
+        "/catalog/tops/zebra/top-zebra-front-alt.jpg?v=4",
+        "/catalog/tops/zebra/top-zebra-side.jpg?v=4",
+        "/catalog/tops/zebra/top-zebra-back.jpg?v=4",
     ],
     "top-browny": [
-        "/catalog/tops/browny/top-browny.jpg?v=3",
-        "/catalog/tops/browny/top-browny-front-alt.jpg?v=3",
-        "/catalog/tops/browny/top-browny-back.jpg?v=3",
+        "/catalog/tops/browny/top-browny.jpg?v=4",
+        "/catalog/tops/browny/top-browny-front-alt.jpg?v=4",
+        "/catalog/tops/browny/top-browny-back.jpg?v=4",
     ],
     "top-gradient": [
-        "/catalog/tops/gradient/top-gradient.jpg?v=3",
-        "/catalog/tops/gradient/top-gradient-front-alt.jpg?v=3",
-        "/catalog/tops/gradient/top-gradient-back.jpg?v=3",
+        "/catalog/tops/gradient/top-gradient.jpg?v=4",
+        "/catalog/tops/gradient/top-gradient-front-alt.jpg?v=4",
+        "/catalog/tops/gradient/top-gradient-back.jpg?v=4",
     ],
     "top-flower": [
-        "/catalog/tops/flower/top-flower.jpg?v=3",
-        "/catalog/tops/flower/top-flower-front-alt.jpg?v=3",
-        "/catalog/tops/flower/top-flower-back.jpg?v=3",
+        "/catalog/tops/flower/top-flower.jpg?v=4",
+        "/catalog/tops/flower/top-flower-front-alt.jpg?v=4",
+        "/catalog/tops/flower/top-flower-back.jpg?v=4",
     ],
 };
 
@@ -239,6 +242,7 @@ function CatalogProductGroup({
                     >
                         {selectedProduct ? (
                             <CatalogProductDialog
+                                key={selectedProduct.id}
                                 product={selectedProduct}
                                 categoryTitle={group.title}
                             />

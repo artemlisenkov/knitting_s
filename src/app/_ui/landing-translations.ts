@@ -1,4 +1,5 @@
 import {static_products} from "@/public/catalog/catalog.types";
+import { babyCottonPaletteColors, type PaletteColor } from "@/src/app/_ui/palette-colors";
 
 export type LandingLanguage = "pl" | "en" | "uk" | "ru";
 
@@ -56,10 +57,7 @@ type LandingTranslation = {
         eyebrow: string;
         title: string;
         intro: string;
-        colors: Array<{
-            name: string;
-            hex: string;
-        }>;
+        colors: PaletteColor[];
     };
     contactDelivery: {
         eyebrow: string;
@@ -176,15 +174,8 @@ export const landingTranslations = {
         palette: {
             eyebrow: "Color palette",
             title: "Choose the mood of your crochet piece",
-            intro: "Soft neutrals, warm natural tones, and brighter accents can be matched to your idea before I start making the order.",
-            colors: [
-                { name: "Milk", hex: "#f6eee6" },
-                { name: "Powder", hex: "#e8b9c1" },
-                { name: "Cloud blue", hex: "#b9c9d8" },
-                { name: "Sage", hex: "#aebd9a" },
-                { name: "Honey", hex: "#d8a657" },
-                { name: "Cocoa", hex: "#8a6454" },
-            ],
+            intro: "You can choose any colors and any color combinations for any piece, so the final crochet item matches exactly what you have in mind.",
+            colors: babyCottonPaletteColors,
         },
         contactDelivery: {
             eyebrow: "Contact",
@@ -299,15 +290,8 @@ export const landingTranslations = {
         palette: {
             eyebrow: "Paleta kolorów",
             title: "Wybierz nastrój swojej szydełkowanej rzeczy",
-            intro: "Delikatne neutralne odcienie, ciepłe naturalne kolory i jaśniejsze akcenty mogę dopasować do Twojego pomysłu przed rozpoczęciem zamówienia.",
-            colors: [
-                { name: "Milk", hex: "#f6eee6" },
-                { name: "Powder", hex: "#e8b9c1" },
-                { name: "Cloud blue", hex: "#b9c9d8" },
-                { name: "Sage", hex: "#aebd9a" },
-                { name: "Honey", hex: "#d8a657" },
-                { name: "Cocoa", hex: "#8a6454" },
-            ],
+            intro: "Możesz wybrać dowolne kolory i dowolne ich połączenia do każdej rzeczy, tak aby gotowy szydełkowany projekt dokładnie odpowiadał Twojemu pomysłowi.",
+            colors: babyCottonPaletteColors,
         },
         contactDelivery: {
             eyebrow: "Kontakt",
@@ -422,15 +406,8 @@ export const landingTranslations = {
         palette: {
             eyebrow: "Палітра кольорів",
             title: "Оберіть настрій своєї речі гачком",
-            intro: "М'які нейтральні відтінки, теплі природні кольори та яскравіші акценти можна підібрати під вашу ідею до початку замовлення.",
-            colors: [
-                { name: "Milk", hex: "#f6eee6" },
-                { name: "Powder", hex: "#e8b9c1" },
-                { name: "Cloud blue", hex: "#b9c9d8" },
-                { name: "Sage", hex: "#aebd9a" },
-                { name: "Honey", hex: "#d8a657" },
-                { name: "Cocoa", hex: "#8a6454" },
-            ],
+            intro: "Ви можете обрати будь-які кольори та будь-які їх поєднання для будь-якої речі, щоб готовий виріб гачком точно відповідав вашій задумці.",
+            colors: babyCottonPaletteColors,
         },
         contactDelivery: {
             eyebrow: "Контакти",
@@ -545,15 +522,8 @@ export const landingTranslations = {
         palette: {
             eyebrow: "Палитра цветов",
             title: "Выберите настроение своей вещи крючком",
-            intro: "Мягкие нейтральные оттенки, теплые натуральные цвета и более яркие акценты можно подобрать под вашу идею до начала заказа.",
-            colors: [
-                { name: "Milk", hex: "#f6eee6" },
-                { name: "Powder", hex: "#e8b9c1" },
-                { name: "Cloud blue", hex: "#b9c9d8" },
-                { name: "Sage", hex: "#aebd9a" },
-                { name: "Honey", hex: "#d8a657" },
-                { name: "Cocoa", hex: "#8a6454" },
-            ],
+            intro: "Вы можете выбрать любые цвета и любые их сочетания для любой вещи, чтобы готовое изделие крючком точно соответствовало вашей задумке.",
+            colors: babyCottonPaletteColors,
         },
         contactDelivery: {
             eyebrow: "Контакты",
