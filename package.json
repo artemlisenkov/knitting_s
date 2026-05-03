@@ -4,9 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev --webpack",
-    "build": "next build --webpack",
-    "start": "next start",
-    "lint": "eslint"
+    "build": "NODE_OPTIONS=--max-old-space-size=3072 next build --webpack",
+    "start": "NODE_OPTIONS=--max-old-space-size=3072 next start",
+    "lint": "eslint",
+    "build:server": "./scripts/server-build.sh",
+    "deploy:server": "./scripts/server-deploy.sh",
+    "restart:server": "./scripts/server-restart.sh",
+    "run:standalone": "./scripts/server-run.sh"
   },
   "dependencies": {
     "@base-ui/react": "^1.3.0",
