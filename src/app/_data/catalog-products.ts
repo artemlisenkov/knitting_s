@@ -3,6 +3,7 @@ import "server-only";
 import { asc, eq } from "drizzle-orm";
 import { db } from "@/src/db";
 import { catalogProduct, catalogProductImage } from "@/src/db/schema";
+import { toPublicAssetPath } from "@/src/lib/public-asset-path";
 
 type CatalogProductSelect = typeof catalogProduct.$inferSelect;
 type ProductWithGallery = Pick<
@@ -46,7 +47,7 @@ export const getPublishedCatalogProducts = async () => {
             category: row.category,
             title: row.title,
             description: row.description,
-            imagePath: row.imagePath,
+            imagePath: toPublicAssetPath(row.imagePath),
             imageAlt: row.imageAlt,
             galleryImages: [],
         };
@@ -58,7 +59,7 @@ export const getPublishedCatalogProducts = async () => {
         if (row.galleryImageId && row.galleryImagePath) {
             product.galleryImages.push({
                 id: row.galleryImageId,
-                imagePath: row.galleryImagePath,
+                imagePath: toPublicAssetPath(row.galleryImagePath),
                 imageAlt: row.galleryImageAlt,
             });
         }

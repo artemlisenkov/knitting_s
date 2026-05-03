@@ -5,6 +5,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState, type RefObject } from "react";
 import { Button, buttonVariants } from "@/src/components/ui/button";
 import { Dialog } from "@/src/components/ui/dialog";
+import { toPublicAssetPath } from "@/src/lib/public-asset-path";
 import { cn } from "@/src/lib/utils";
 import { CatalogMobileProductPage } from "@/src/app/_ui/catalog/catalog-mobile-product-page";
 import { CatalogProductDialog } from "@/src/app/_ui/catalog/catalog-product-dialog";
@@ -17,39 +18,39 @@ type StaticCatalogProductId = LandingCatalogGroup["products"][number]["id"];
 
 const staticCatalogProductGalleries: Record<StaticCatalogProductId, string[]> = {
     "cardigan-cloudy": [
-        "/catalog/cardigans/unisex/cardigan-unisex.jpg?v=5",
-        "/catalog/cardigans/unisex/cardigan-unisex-front-alt.jpg?v=5",
-        "/catalog/cardigans/unisex/cardigan-unisex-side.jpg?v=5",
-        "/catalog/cardigans/unisex/cardigan-unisex-back.jpg?v=5",
+        "/catalog/cardigans/unisex/cardigan-unisex.jpg",
+        "/catalog/cardigans/unisex/cardigan-unisex-front-alt.jpg",
+        "/catalog/cardigans/unisex/cardigan-unisex-side.jpg",
+        "/catalog/cardigans/unisex/cardigan-unisex-back.jpg",
     ],
     "cardigan-sunflower": [
-        "/catalog/cardigans/sunflower/cardigan-sunflower.jpg?v=5",
-        "/catalog/cardigans/sunflower/cardigan-sunflower-side.jpg?v=5",
-        "/catalog/cardigans/sunflower/cardigan-sunflower-back-alt.jpg?v=5",
-        "/catalog/cardigans/sunflower/cardigan-sunflower-back.jpg?v=5",
+        "/catalog/cardigans/sunflower/cardigan-sunflower.jpg",
+        "/catalog/cardigans/sunflower/cardigan-sunflower-side.jpg",
+        "/catalog/cardigans/sunflower/cardigan-sunflower-back-alt.jpg",
+        "/catalog/cardigans/sunflower/cardigan-sunflower-back.jpg",
     ],
     "top-zebra": [
-        "/catalog/tops/zebra/top-zebra.jpg?v=5",
-        "/catalog/tops/zebra/top-zebra-alt.jpg?v=5",
-        "/catalog/tops/zebra/top-zebra-back.jpg?v=5",
+        "/catalog/tops/zebra/top-zebra.jpg",
+        "/catalog/tops/zebra/top-zebra-alt.jpg",
+        "/catalog/tops/zebra/top-zebra-back.jpg",
     ],
     "top-browny": [
-        "/catalog/tops/browny/top-browny.jpg?v=5",
-        "/catalog/tops/browny/top-browny-side.jpg?v=5",
-        "/catalog/tops/browny/top-browny-back.jpg?v=5",
+        "/catalog/tops/browny/top-browny.jpg",
+        "/catalog/tops/browny/top-browny-side.jpg",
+        "/catalog/tops/browny/top-browny-back.jpg",
     ],
     "top-gradient": [
-        "/catalog/tops/gradient/top-gradient.jpg?v=5",
-        "/catalog/tops/gradient/top-gradient-alt.jpg?v=5",
-        "/catalog/tops/gradient/top-gradient-back.jpg?v=5",
-        "/catalog/tops/gradient/top-gradient-back-alt.jpg?v=5",
-        "/catalog/tops/gradient/top-gradient-side.jpg?v=5",
-        "/catalog/tops/gradient/top-gradient-side-alt.jpg?v=5",
+        "/catalog/tops/gradient/top-gradient.jpg",
+        "/catalog/tops/gradient/top-gradient-alt.jpg",
+        "/catalog/tops/gradient/top-gradient-back.jpg",
+        "/catalog/tops/gradient/top-gradient-back-alt.jpg",
+        "/catalog/tops/gradient/top-gradient-side.jpg",
+        "/catalog/tops/gradient/top-gradient-side-alt.jpg",
     ],
     "top-flower": [
-        "/catalog/tops/flower/top-flower.jpg?v=5",
-        "/catalog/tops/flower/top-flower-front-alt.jpg?v=5",
-        "/catalog/tops/flower/top-flower-back.jpg?v=5",
+        "/catalog/tops/flower/top-flower.jpg",
+        "/catalog/tops/flower/top-flower-front-alt.jpg",
+        "/catalog/tops/flower/top-flower-back.jpg",
     ],
 };
 
@@ -141,7 +142,7 @@ function CatalogProductGroup({
         ...group.products.map((product) => {
             const galleryImages = staticCatalogProductGalleries[product.id].map((src, index) => ({
                 id: `${product.id}-${index}`,
-                src,
+                src: toPublicAssetPath(src),
                 alt: product.imageAlt,
             }));
             const imageSrc = galleryImages[0].src;
@@ -162,16 +163,16 @@ function CatalogProductGroup({
                     title: product.title ?? fallbackProductTitle,
                     description: product.description ?? fallbackProductDescription,
                     imageAlt,
-                    imageSrc: product.imagePath,
+                    imageSrc: toPublicAssetPath(product.imagePath),
                     galleryImages: createProductGallery(
                         {
                             id: `${product.id}-primary`,
-                            src: product.imagePath,
+                            src: toPublicAssetPath(product.imagePath),
                             alt: imageAlt,
                         },
                         product.galleryImages.map((image) => ({
                             id: image.id,
-                            src: image.imagePath,
+                            src: toPublicAssetPath(image.imagePath),
                             alt: image.imageAlt ?? imageAlt,
                         }))
                     ),

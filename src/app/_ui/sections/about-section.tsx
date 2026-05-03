@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { buttonVariants } from "@/src/components/ui/button";
+import { toPublicAssetPath } from "@/src/lib/public-asset-path";
 import { cn } from "@/src/lib/utils";
 import type { LandingCopy } from "@/src/app/_ui/landing/landing-types";
 
@@ -56,7 +57,7 @@ export function AboutSection({
                     <div className="group/photo ml-auto max-w-md overflow-hidden rounded-md border border-[#d78d98] bg-[#fffaf8] p-3 sm:shadow-[12px_12px_0_rgba(176,91,102,0.2)]">
                         <div className="relative aspect-[4/5] overflow-hidden rounded-md bg-white">
                             <Image
-                                src="/main/portfolio_kate.jpg?v=3"
+                                src={toPublicAssetPath("/main/portfolio_kate.JPG")}
                                 alt={aboutMe.imageAlt}
                                 fill
                                 sizes="(min-width: 1024px) 420px, 100vw"

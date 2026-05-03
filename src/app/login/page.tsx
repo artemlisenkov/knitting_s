@@ -1,7 +1,12 @@
+import type { Metadata } from "next";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/src/components/ui/card";
 import {LoginButtons} from "@/src/components/auth/login-buttons";
 import {getSession} from "@/src/lib/auth";
 import {redirect} from "next/navigation";
+
+export const metadata: Metadata = {
+  title: "Crochet | Login",
+};
 
 async function LoginPage() {
   const session = await getSession();

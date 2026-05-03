@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import {getSession} from "@/src/lib/auth";
 import {redirect} from "next/navigation";
 import {HomePageContents} from "@/src/app/home/_ui/home-page-contents";
@@ -6,6 +7,10 @@ import {dehydrate, HydrationBoundary} from "@tanstack/react-query";
 import {ErrorBoundary} from "react-error-boundary";
 import {Suspense} from "react";
 import { getPublishedCatalogProducts } from "@/src/app/_data/catalog-products";
+
+export const metadata: Metadata = {
+    title: "Crochet | Admin",
+};
 
 async function HomePage() {
     const session = await getSession();
