@@ -248,7 +248,7 @@ function CatalogProductGroup({
                                 key={product.id}
                                 className={cn(
                                     "min-w-0 transition-all duration-700 ease-out",
-                                    isVisible ? "translate-x-0 opacity-100" : "translate-x-16 opacity-0"
+                                    isVisible ? "translate-x-0 opacity-100" : "opacity-0 sm:translate-x-16"
                                 )}
                                 style={{ transitionDelay: `${index * 120}ms` }}
                             >
