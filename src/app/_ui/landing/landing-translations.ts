@@ -1,5 +1,5 @@
 import {static_products} from "@/public/catalog/catalog.types";
-import { babyCottonPaletteColors, type PaletteColor } from "@/src/app/_ui/palette-colors";
+import { babyCottonPaletteColors, type PaletteColor } from "@/src/app/_ui/landing/palette-colors";
 
 export type LandingLanguage = "pl" | "en" | "uk" | "ru";
 

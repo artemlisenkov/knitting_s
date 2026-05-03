@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image";
-import type { LandingCopy } from "@/src/app/_ui/landing-types";
+import type { LandingCopy } from "@/src/app/_ui/landing/landing-types";
 
 export function MeasurementsSection({
     measurements,
@@ -16,7 +16,7 @@ export function MeasurementsSection({
                         {measurements.title}
                     </h2>
 
-                    <div className="mt-8 rounded-md border border-[#d78d98] bg-[#fffaf8] p-6 shadow-[10px_10px_0_rgba(176,91,102,0.14)] sm:p-8">
+                    <div className="mt-8 rounded-md border border-[#d78d98] bg-[#fffaf8] p-6 sm:shadow-[10px_10px_0_rgba(176,91,102,0.14)] sm:p-8">
                         <div className="grid gap-5">
                             {measurements.items.map((item, index) => (
                             <div
@@ -44,7 +44,7 @@ export function MeasurementsSection({
                 </div>
 
                 <div className="order-1 lg:order-2">
-                    <div className="mx-auto w-full max-w-sm rounded-md border border-[#d78d98] bg-[#fffaf8] p-4 shadow-[10px_10px_0_rgba(176,91,102,0.14)] sm:max-w-md sm:p-5">
+                    <div className="mx-auto w-full max-w-sm rounded-md border border-[#d78d98] bg-[#fffaf8] p-4 sm:shadow-[10px_10px_0_rgba(176,91,102,0.14)] sm:max-w-md sm:p-5">
                         <div className="relative aspect-[4/5] overflow-hidden rounded-md bg-white">
                             <Image
                                 src="/main/measurements.jpg"

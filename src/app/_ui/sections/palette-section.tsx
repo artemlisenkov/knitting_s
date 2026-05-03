@@ -3,7 +3,7 @@
 import { ChevronDownIcon } from "lucide-react";
 import Image from "next/image";
 import { useLayoutEffect, useRef, useState } from "react";
-import type { LandingCopy } from "@/src/app/_ui/landing-types";
+import type { LandingCopy } from "@/src/app/_ui/landing/landing-types";
 import { Button } from "@/src/components/ui/button";
 
 export function PaletteSection({

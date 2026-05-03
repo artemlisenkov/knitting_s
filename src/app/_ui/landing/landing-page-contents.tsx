@@ -2,21 +2,21 @@
 
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { AboutSection } from "@/src/app/_ui/about-section";
-import { CatalogSection } from "@/src/app/_ui/catalog-section";
-import { ContactDeliverySection } from "@/src/app/_ui/contact-delivery-section";
-import { CustomOrderSection } from "@/src/app/_ui/custom-order-section";
+import { CatalogSection } from "@/src/app/_ui/catalog/catalog-section";
+import { AboutSection } from "@/src/app/_ui/sections/about-section";
+import { ContactDeliverySection } from "@/src/app/_ui/sections/contact-delivery-section";
+import { CustomOrderSection } from "@/src/app/_ui/sections/custom-order-section";
 import {
     DevViewportSwitch,
     type DevPreviewMode,
-} from "@/src/app/_ui/dev-viewport-switch";
-import { LandingHeader } from "@/src/app/_ui/landing-header";
+} from "@/src/app/_ui/landing/dev-viewport-switch";
+import { LandingHeader } from "@/src/app/_ui/landing/landing-header";
 import {
     landingTranslations,
     type LandingLanguage,
-} from "@/src/app/_ui/landing-translations";
-import { MeasurementsSection } from "@/src/app/_ui/measurements-section";
-import { PaletteSection } from "@/src/app/_ui/palette-section";
+} from "@/src/app/_ui/landing/landing-translations";
+import { MeasurementsSection } from "@/src/app/_ui/sections/measurements-section";
+import { PaletteSection } from "@/src/app/_ui/sections/palette-section";
 import type { PublishedCatalogProduct } from "@/src/app/_data/catalog-products";
 
 export const LandingPageContents = ({

@@ -1,14 +1,17 @@
 "use client"
 
 import Image from "next/image";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState, type RefObject } from "react";
 import { Button, buttonVariants } from "@/src/components/ui/button";
 import { Dialog } from "@/src/components/ui/dialog";
 import { cn } from "@/src/lib/utils";
-import { CatalogProductDialog } from "@/src/app/_ui/catalog-product-dialog";
+import { CatalogMobileProductPage } from "@/src/app/_ui/catalog/catalog-mobile-product-page";
+import { CatalogProductDialog } from "@/src/app/_ui/catalog/catalog-product-dialog";
 import type { PublishedCatalogProduct } from "@/src/app/_data/catalog-products";
-import type { CatalogDisplayProduct, CatalogDisplayProductImage } from "@/src/app/_ui/catalog-product-types";
-import type { LandingCatalogGroup, LandingCopy } from "@/src/app/_ui/landing-types";
+import type { CatalogDisplayProduct, CatalogDisplayProductImage } from "@/src/app/_ui/catalog/catalog-product-types";
+import type { LandingCatalogGroup, LandingCopy } from "@/src/app/_ui/landing/landing-types";
+import { useIsMobile } from "@/src/hooks/use-mobile";
 
 type StaticCatalogProductId = LandingCatalogGroup["products"][number]["id"];
 
@@ -128,6 +131,10 @@ function CatalogProductGroup({
     isVisible: boolean;
     isAdminView: boolean;
 }) {
+    const isMobile = useIsMobile();
+    const router = useRouter();
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
     const [page, setPage] = useState(0);
     const [selectedProductId, setSelectedProductId] = useState<string | null>(null);
     const products: CatalogDisplayProduct[] = [
@@ -171,11 +178,48 @@ function CatalogProductGroup({
                 };
             }),
     ];
+    const mobileSelectedProductId = searchParams.get("product");
+    const mobileSelectedProduct = isMobile
+        ? products.find((product) => product.id === mobileSelectedProductId) ?? null
+        : null;
     const selectedProduct = products.find((product) => product.id === selectedProductId) ?? null;
     const pageCount = Math.max(1, Math.ceil(products.length / catalogPageSize));
     const pageProducts = products.slice(page * catalogPageSize, (page + 1) * catalogPageSize);
 
     const showNextPage = () => setPage((currentPage) => (currentPage + 1) % pageCount);
+    const createProductHref = (productId: string) => {
+        const params = new URLSearchParams(searchParams.toString());
+
+        params.set("product", productId);
+
+        const query = params.toString();
+
+        return query ? `${pathname}?${query}` : pathname;
+    };
+    const openProduct = (productId: string) => {
+        if (isMobile) {
+            router.push(createProductHref(productId), { scroll: false });
+            return;
+        }
+
+        setSelectedProductId(productId);
+    };
+    const closeMobileProductPage = () => {
+        if (!mobileSelectedProductId) return;
+
+        if (window.history.length > 1) {
+            router.back();
+            return;
+        }
+
+        const params = new URLSearchParams(searchParams.toString());
+
+        params.delete("product");
+
+        const query = params.toString();
+
+        router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
+    };
 
     return (
         <section aria-label={group.title}>
@@ -211,9 +255,9 @@ function CatalogProductGroup({
                                     type="button"
                                     className="group block w-full min-w-0 rounded-md text-left outline-none focus-visible:ring-2 focus-visible:ring-[#994d59] focus-visible:ring-offset-4 focus-visible:ring-offset-[#f8eef0]"
                                     aria-label={`Open ${product.title}`}
-                                    onClick={() => setSelectedProductId(product.id)}
+                                    onClick={() => openProduct(product.id)}
                                 >
-                                    <div className="overflow-hidden rounded-md border border-[#d78d98] bg-[#fffaf8] p-1.5 shadow-none transition-all duration-200 group-hover:-translate-y-1 group-hover:shadow-md sm:p-2 lg:shadow-[8px_8px_0_rgba(176,91,102,0.12)]">
+                                    <div className="overflow-hidden rounded-md border border-[#d78d98] bg-[#fffaf8] p-1.5 shadow-none transition-all duration-200 group-hover:-translate-y-1 sm:group-hover:shadow-md sm:p-2 lg:shadow-[8px_8px_0_rgba(176,91,102,0.12)]">
                                         <div className="relative aspect-3/4 overflow-hidden rounded-md bg-white">
                                             <Image
                                                 src={product.imageSrc}
@@ -236,26 +280,37 @@ function CatalogProductGroup({
                         ))}
                     </div>
 
-                    <Dialog
-                        open={selectedProduct !== null}
-                        onOpenChange={(isOpen) => {
-                            if (!isOpen) setSelectedProductId(null);
-                        }}
-                    >
-                        {selectedProduct ? (
-                            <CatalogProductDialog
-                                key={selectedProduct.id}
-                                product={selectedProduct}
-                                categoryTitle={group.title}
-                            />
-                        ) : null}
-                    </Dialog>
+                    {!isMobile ? (
+                        <Dialog
+                            open={selectedProduct !== null}
+                            onOpenChange={(isOpen) => {
+                                if (!isOpen) setSelectedProductId(null);
+                            }}
+                        >
+                            {selectedProduct ? (
+                                <CatalogProductDialog
+                                    key={selectedProduct.id}
+                                    product={selectedProduct}
+                                    categoryTitle={group.title}
+                                />
+                            ) : null}
+                        </Dialog>
+                    ) : null}
+
+                    {mobileSelectedProduct ? (
+                        <CatalogMobileProductPage
+                            key={mobileSelectedProduct.id}
+                            product={mobileSelectedProduct}
+                            categoryTitle={group.title}
+                            onClose={closeMobileProductPage}
+                        />
+                    ) : null}
 
                     {pageCount > 1 ? (
                         <Button
                             type="button"
                             size="icon"
-                            className="absolute right-0 top-1/2 size-12 -translate-y-1/2 rounded-full bg-[#b05b66] text-white shadow-md hover:bg-[#994d59]"
+                            className="absolute right-0 top-1/2 size-12 -translate-y-1/2 rounded-full bg-[#b05b66] text-white sm:shadow-md hover:bg-[#994d59]"
                             aria-label={`Next ${group.title} page`}
                             onClick={showNextPage}
                         >
@@ -301,7 +356,7 @@ function AdminCategoryAddButton({
             type="button"
             className={cn(
                 buttonVariants({ variant: "outline", size: "sm" }),
-                "h-8 rounded-full border-[#ead0d4]/70 bg-white/45 px-3 text-xs font-semibold uppercase tracking-[0.08em] text-[#4d3b3f] shadow-sm hover:bg-white/65 hover:text-[#994d59] hover:shadow-sm"
+                "h-8 rounded-full border-[#ead0d4]/70 bg-white/45 px-3 text-xs font-semibold uppercase tracking-[0.08em] text-[#4d3b3f] sm:shadow-sm hover:bg-white/65 hover:text-[#994d59] sm:hover:shadow-sm"
             )}
             aria-label={`Add product photo to ${categoryTitle}`}
         >

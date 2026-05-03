@@ -1,6 +1,6 @@
 import {getSession} from "@/src/lib/auth";
 import {redirect} from "next/navigation";
-import { LandingPageContents } from "@/src/app/_ui/landing-page-contents";
+import { LandingPageContents } from "@/src/app/_ui/landing/landing-page-contents";
 import {getQueryClient} from "@/src/trpc/server";
 import {dehydrate, HydrationBoundary} from "@tanstack/react-query";
 import {ErrorBoundary} from "react-error-boundary";

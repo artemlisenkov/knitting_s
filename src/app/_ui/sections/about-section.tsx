@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { buttonVariants } from "@/src/components/ui/button";
 import { cn } from "@/src/lib/utils";
-import type { LandingCopy } from "@/src/app/_ui/landing-types";
+import type { LandingCopy } from "@/src/app/_ui/landing/landing-types";
 
 export function AboutSection({
     aboutMe,
@@ -35,7 +35,7 @@ export function AboutSection({
                             href="#catalog"
                             className={cn(
                                 buttonVariants(),
-                                "bg-[#b05b66] px-5 text-white shadow-sm hover:-translate-y-0.5 hover:rounded-lg hover:bg-[#994d59] hover:shadow-md"
+                                "bg-[#b05b66] px-5 text-white sm:shadow-sm hover:-translate-y-0.5 hover:rounded-lg hover:bg-[#994d59] sm:hover:shadow-md"
                             )}
                         >
                             {aboutMe.primaryAction}
@@ -44,7 +44,7 @@ export function AboutSection({
                             href={secondaryActionHref}
                             className={cn(
                                 buttonVariants({ variant: "outline" }),
-                                "border-[#d9a0a8] bg-white/45 px-5 text-[#6c3f46] hover:-translate-y-0.5 hover:rounded-lg hover:border-[#b05b66] hover:bg-white hover:text-[#994d59] hover:shadow-md"
+                                "border-[#d9a0a8] bg-white/45 px-5 text-[#6c3f46] hover:-translate-y-0.5 hover:rounded-lg hover:border-[#b05b66] hover:bg-white hover:text-[#994d59] sm:hover:shadow-md"
                             )}
                         >
                             {aboutMe.secondaryAction}
@@ -53,7 +53,7 @@ export function AboutSection({
                 </div>
 
                 <div className="order-1 lg:order-2">
-                    <div className="group/photo ml-auto max-w-md overflow-hidden rounded-md border border-[#d78d98] bg-[#fffaf8] p-3 shadow-[12px_12px_0_rgba(176,91,102,0.2)]">
+                    <div className="group/photo ml-auto max-w-md overflow-hidden rounded-md border border-[#d78d98] bg-[#fffaf8] p-3 sm:shadow-[12px_12px_0_rgba(176,91,102,0.2)]">
                         <div className="relative aspect-[4/5] overflow-hidden rounded-md bg-white">
                             <Image
                                 src="/main/portfolio_kate.jpg?v=3"

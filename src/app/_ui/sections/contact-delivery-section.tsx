@@ -1,7 +1,7 @@
 "use client"
 
 import { FaInstagram, FaTelegramPlane } from "react-icons/fa";
-import type { LandingCopy } from "@/src/app/_ui/landing-types";
+import type { LandingCopy } from "@/src/app/_ui/landing/landing-types";
 
 export function ContactDeliverySection({
     contactDelivery,
