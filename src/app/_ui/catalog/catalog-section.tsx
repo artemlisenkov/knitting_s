@@ -9,6 +9,7 @@ import { toPublicAssetPath } from "@/src/lib/public-asset-path";
 import { cn } from "@/src/lib/utils";
 import { CatalogMobileProductPage } from "@/src/app/_ui/catalog/catalog-mobile-product-page";
 import { CatalogProductDialog } from "@/src/app/_ui/catalog/catalog-product-dialog";
+import { CatalogProductPrice } from "@/src/app/_ui/catalog/catalog-product-price";
 import type { PublishedCatalogProduct } from "@/src/app/_data/catalog-products";
 import type { CatalogDisplayProduct, CatalogDisplayProductImage } from "@/src/app/_ui/catalog/catalog-product-types";
 import type { LandingCatalogGroup, LandingCopy } from "@/src/app/_ui/landing/landing-types";
@@ -22,6 +23,7 @@ const staticCatalogProductGalleries: Record<StaticCatalogProductId, string[]> = 
         "/catalog/cardigans/unisex/cardigan-unisex-front-alt.jpg",
         "/catalog/cardigans/unisex/cardigan-unisex-side.jpg",
         "/catalog/cardigans/unisex/cardigan-unisex-back.jpg",
+        "/catalog/cardigans/unisex/cardigan-unisex-front-alt-02.jpg",
     ],
     "cardigan-sunflower": [
         "/catalog/cardigans/sunflower/cardigan-sunflower.jpg",
@@ -162,6 +164,7 @@ function CatalogProductGroup({
                     id: product.id,
                     title: product.title ?? fallbackProductTitle,
                     description: product.description ?? fallbackProductDescription,
+                    price: product.pricePln === null ? null : `${product.pricePln} pln`,
                     imageAlt,
                     imageSrc: toPublicAssetPath(product.imagePath),
                     galleryImages: createProductGallery(
@@ -273,6 +276,12 @@ function CatalogProductGroup({
                                     <span className="mt-3 block text-base font-semibold text-[#2c2426] sm:mt-4 sm:text-lg">
                                         {product.title}
                                     </span>
+                                    {product.price ? (
+                                        <CatalogProductPrice
+                                            price={product.price}
+                                            compact
+                                        />
+                                    ) : null}
                                     <span className="mt-1.5 block text-xs leading-5 text-[#6a5b5f] sm:mt-2 sm:text-sm sm:leading-6">
                                         {product.description}
                                     </span>

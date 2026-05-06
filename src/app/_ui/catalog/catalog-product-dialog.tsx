@@ -2,6 +2,7 @@
 
 import { DialogContent, DialogDescription, DialogTitle } from "@/src/components/ui/dialog";
 import { CatalogProductMediaGallery } from "@/src/app/_ui/catalog/catalog-product-media-gallery";
+import { CatalogProductPrice } from "@/src/app/_ui/catalog/catalog-product-price";
 import type { CatalogDisplayProduct } from "@/src/app/_ui/catalog/catalog-product-types";
 
 export function CatalogProductDialog({
@@ -23,6 +24,11 @@ export function CatalogProductDialog({
                     <DialogTitle className="mt-4 font-serif text-4xl leading-tight text-[#2c2426] sm:text-5xl">
                         {product.title}
                     </DialogTitle>
+                    {product.price ? (
+                        <CatalogProductPrice
+                            price={product.price}
+                        />
+                    ) : null}
                     <DialogDescription className="mt-5 text-base leading-7 text-[#5f5154] sm:text-lg">
                         {product.description}
                     </DialogDescription>

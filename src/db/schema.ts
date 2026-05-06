@@ -53,6 +53,7 @@ export const catalogProduct = pgTable("catalog_product", {
     category: catalogCategory("category").notNull(),
     title: text("title"),
     description: text("description"),
+    pricePln: integer("price_pln"),
     imagePath: text("image_path").notNull(),
     imageAlt: text("image_alt"),
     sortOrder: integer("sort_order").notNull().default(0),

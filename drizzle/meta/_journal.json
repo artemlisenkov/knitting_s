@@ -50,6 +50,13 @@
       "when": 1776709792389,
       "tag": "0006_late_joseph",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1778084885453,
+      "tag": "0007_mysterious_shadow_king",
+      "breakpoints": true
     }
   ]
 }

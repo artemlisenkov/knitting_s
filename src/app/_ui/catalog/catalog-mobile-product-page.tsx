@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { ArrowLeftIcon } from "lucide-react";
 import { Button } from "@/src/components/ui/button";
 import { CatalogProductMediaGallery } from "@/src/app/_ui/catalog/catalog-product-media-gallery";
+import { CatalogProductPrice } from "@/src/app/_ui/catalog/catalog-product-price";
 import type { CatalogDisplayProduct } from "@/src/app/_ui/catalog/catalog-product-types";
 
 export function CatalogMobileProductPage({
@@ -62,6 +63,11 @@ export function CatalogMobileProductPage({
                             <h2 className="font-serif text-4xl leading-tight text-[#2c2426]">
                                 {product.title}
                             </h2>
+                            {product.price ? (
+                                <CatalogProductPrice
+                                    price={product.price}
+                                />
+                            ) : null}
                             <p className="mt-4 text-base leading-7 text-[#5f5154]">
                                 {product.description}
                             </p>

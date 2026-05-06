@@ -8,7 +8,7 @@ import { toPublicAssetPath } from "@/src/lib/public-asset-path";
 type CatalogProductSelect = typeof catalogProduct.$inferSelect;
 type ProductWithGallery = Pick<
     CatalogProductSelect,
-    "id" | "category" | "title" | "description" | "imagePath" | "imageAlt"
+    "id" | "category" | "title" | "description" | "pricePln" | "imagePath" | "imageAlt"
 > & {
     galleryImages: Array<{
         id: string;
@@ -24,6 +24,7 @@ export const getPublishedCatalogProducts = async () => {
             category: catalogProduct.category,
             title: catalogProduct.title,
             description: catalogProduct.description,
+            pricePln: catalogProduct.pricePln,
             imagePath: catalogProduct.imagePath,
             imageAlt: catalogProduct.imageAlt,
             galleryImageId: catalogProductImage.id,
@@ -47,6 +48,7 @@ export const getPublishedCatalogProducts = async () => {
             category: row.category,
             title: row.title,
             description: row.description,
+            pricePln: row.pricePln,
             imagePath: toPublicAssetPath(row.imagePath),
             imageAlt: row.imageAlt,
             galleryImages: [],

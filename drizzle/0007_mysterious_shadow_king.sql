@@ -1,0 +1,1 @@
+ALTER TABLE "catalog_product" ADD COLUMN "price_pln" integer;

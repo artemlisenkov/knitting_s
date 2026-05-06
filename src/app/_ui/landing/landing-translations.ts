@@ -49,6 +49,7 @@ type LandingTranslation = {
                 id: static_products;
                 title: string;
                 description: string;
+                price: string;
                 imageAlt: string;
             }>;
         }>;
@@ -77,6 +78,15 @@ type LandingTranslation = {
         telegramLabel: string;
         telegramHref: string;
     };
+};
+
+const staticCatalogProductPrices: Record<static_products, string> = {
+    "cardigan-cloudy": "250 pln",
+    "cardigan-sunflower": "250 pln",
+    "top-browny": "110 pln",
+    "top-flower": "120 pln",
+    "top-gradient": "100 pln",
+    "top-zebra": "100 pln",
 };
 
 export const landingTranslations = {
@@ -139,12 +149,14 @@ export const landingTranslations = {
                             id: "cardigan-cloudy",
                             title: "Cardigan Unisex",
                             description: "A soft crochet cardigan with an airy texture and an easy layered fit.",
+                            price: staticCatalogProductPrices["cardigan-cloudy"],
                             imageAlt: "Cardigan Unisex photo",
                         },
                         {
                             id: "cardigan-sunflower",
                             title: "Cardigan Sunflower",
                             description: "A crochet cardigan with a bold black-and-yellow sunflower pattern.",
+                            price: staticCatalogProductPrices["cardigan-sunflower"],
                             imageAlt: "Cardigan Sunflower photo",
                         },
                     ],
@@ -157,24 +169,28 @@ export const landingTranslations = {
                             id: "top-zebra",
                             title: "Top Zebra",
                             description: "A handmade crochet top with a clear black-and-white pattern.",
+                            price: staticCatalogProductPrices["top-zebra"],
                             imageAlt: "Top Zebra photo",
                         },
                         {
                             id: "top-browny",
                             title: "Top Browny",
                             description: "A warm-toned crochet top for easy summer outfits.",
+                            price: staticCatalogProductPrices["top-browny"],
                             imageAlt: "Top Browny photo",
                         },
                         {
                             id: "top-gradient",
                             title: "Top Gradient",
                             description: "A soft crochet top with a smooth color transition.",
+                            price: staticCatalogProductPrices["top-gradient"],
                             imageAlt: "Top Gradient photo",
                         },
                         {
                             id: "top-flower",
                             title: "Top Flower",
                             description: "A light crochet top with a delicate floral mood.",
+                            price: staticCatalogProductPrices["top-flower"],
                             imageAlt: "Top Flower photo",
                         },
                     ],
@@ -277,12 +293,14 @@ export const landingTranslations = {
                             id: "cardigan-cloudy",
                             title: "Cardigan Unisex",
                             description: "Miękki szydełkowany kardigan o lekkiej fakturze i swobodnej warstwowej formie.",
+                            price: staticCatalogProductPrices["cardigan-cloudy"],
                             imageAlt: "Zdjęcie Cardigan Unisex",
                         },
                         {
                             id: "cardigan-sunflower",
                             title: "Cardigan Sunflower",
                             description: "Szydełkowany kardigan z wyrazistym czarno-żółtym wzorem słoneczników.",
+                            price: staticCatalogProductPrices["cardigan-sunflower"],
                             imageAlt: "Zdjęcie Cardigan Sunflower",
                         },
                     ],
@@ -295,24 +313,28 @@ export const landingTranslations = {
                             id: "top-zebra",
                             title: "Top Zebra",
                             description: "Ręcznie szydełkowany top z wyrazistym czarno-białym wzorem.",
+                            price: staticCatalogProductPrices["top-zebra"],
                             imageAlt: "Zdjęcie Top Zebra",
                         },
                         {
                             id: "top-browny",
                             title: "Top Browny",
                             description: "Szydełkowany top w ciepłych odcieniach do letnich stylizacji.",
+                            price: staticCatalogProductPrices["top-browny"],
                             imageAlt: "Zdjęcie Top Browny",
                         },
                         {
                             id: "top-gradient",
                             title: "Top Gradient",
                             description: "Miękki szydełkowany top z płynnym przejściem kolorów.",
+                            price: staticCatalogProductPrices["top-gradient"],
                             imageAlt: "Zdjęcie Top Gradient",
                         },
                         {
                             id: "top-flower",
                             title: "Top Flower",
                             description: "Lekki szydełkowany top z delikatnym kwiatowym nastrojem.",
+                            price: staticCatalogProductPrices["top-flower"],
                             imageAlt: "Zdjęcie Top Flower",
                         },
                     ],
@@ -415,12 +437,14 @@ export const landingTranslations = {
                             id: "cardigan-cloudy",
                             title: "Cardigan Unisex",
                             description: "М'який кардиган гачком із легкою фактурою та зручною посадкою для шарів.",
+                            price: staticCatalogProductPrices["cardigan-cloudy"],
                             imageAlt: "Фото Cardigan Unisex",
                         },
                         {
                             id: "cardigan-sunflower",
                             title: "Cardigan Sunflower",
                             description: "Кардиган гачком із виразним чорно-жовтим візерунком соняшників.",
+                            price: staticCatalogProductPrices["cardigan-sunflower"],
                             imageAlt: "Фото Cardigan Sunflower",
                         },
                     ],
@@ -433,24 +457,28 @@ export const landingTranslations = {
                             id: "top-zebra",
                             title: "Top Zebra",
                             description: "Топ гачком ручної роботи з виразним чорно-білим візерунком.",
+                            price: staticCatalogProductPrices["top-zebra"],
                             imageAlt: "Фото Top Zebra",
                         },
                         {
                             id: "top-browny",
                             title: "Top Browny",
                             description: "Топ гачком у теплих відтінках для літніх образів.",
+                            price: staticCatalogProductPrices["top-browny"],
                             imageAlt: "Фото Top Browny",
                         },
                         {
                             id: "top-gradient",
                             title: "Top Gradient",
                             description: "М'який топ гачком із плавним переходом кольорів.",
+                            price: staticCatalogProductPrices["top-gradient"],
                             imageAlt: "Фото Top Gradient",
                         },
                         {
                             id: "top-flower",
                             title: "Top Flower",
                             description: "Легкий топ гачком із ніжним квітковим настроєм.",
+                            price: staticCatalogProductPrices["top-flower"],
                             imageAlt: "Фото Top Flower",
                         },
                     ],
@@ -553,12 +581,14 @@ export const landingTranslations = {
                             id: "cardigan-cloudy",
                             title: "Cardigan Unisex",
                             description: "Мягкий кардиган крючком с воздушной фактурой и удобной посадкой для многослойных образов.",
+                            price: staticCatalogProductPrices["cardigan-cloudy"],
                             imageAlt: "Фото Cardigan Unisex",
                         },
                         {
                             id: "cardigan-sunflower",
                             title: "Cardigan Sunflower",
                             description: "Кардиган крючком с выразительным черно-желтым узором подсолнухов.",
+                            price: staticCatalogProductPrices["cardigan-sunflower"],
                             imageAlt: "Фото Cardigan Sunflower",
                         },
                     ],
@@ -571,24 +601,28 @@ export const landingTranslations = {
                             id: "top-zebra",
                             title: "Top Zebra",
                             description: "Топ ручной работы крючком с выразительным черно-белым узором.",
+                            price: staticCatalogProductPrices["top-zebra"],
                             imageAlt: "Фото Top Zebra",
                         },
                         {
                             id: "top-browny",
                             title: "Top Browny",
                             description: "Топ крючком в теплых оттенках для летних образов.",
+                            price: staticCatalogProductPrices["top-browny"],
                             imageAlt: "Фото Top Browny",
                         },
                         {
                             id: "top-gradient",
                             title: "Top Gradient",
                             description: "Мягкий топ крючком с плавным переходом цвета.",
+                            price: staticCatalogProductPrices["top-gradient"],
                             imageAlt: "Фото Top Gradient",
                         },
                         {
                             id: "top-flower",
                             title: "Top Flower",
                             description: "Легкий топ крючком с нежным цветочным настроением.",
+                            price: staticCatalogProductPrices["top-flower"],
                             imageAlt: "Фото Top Flower",
                         },
                     ],
