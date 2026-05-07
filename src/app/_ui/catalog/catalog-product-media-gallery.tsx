@@ -123,7 +123,8 @@ export function CatalogProductMediaGallery({
                 alt={image.alt}
                 fill
                 sizes={layout === "desktop" ? "72px" : "80px"}
-                unoptimized
+                quality={50}
+                loading="lazy"
                 className="h-full w-full object-cover"
             />
             <span
@@ -164,7 +165,9 @@ export function CatalogProductMediaGallery({
                     alt={selectedImage.alt}
                     fill
                     sizes={layout === "desktop" ? "(min-width: 1024px) 720px, 100vw" : "100vw"}
-                    unoptimized
+                    quality={72}
+                    loading="eager"
+                    fetchPriority="high"
                     className="h-full w-full object-cover"
                 />
             ) : null}
@@ -258,7 +261,9 @@ export function CatalogProductMediaGallery({
                                     alt={selectedImage.alt}
                                     fill
                                     sizes="100vw"
-                                    unoptimized
+                                    quality={82}
+                                    loading="eager"
+                                    fetchPriority="high"
                                     className="h-full w-full object-contain"
                                 />
                             </div>

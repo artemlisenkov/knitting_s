@@ -176,7 +176,8 @@ function CatalogProductGroup({
                                                 alt={product.imageAlt}
                                                 fill
                                                 sizes="(min-width: 1024px) 25vw, 50vw"
-                                                unoptimized
+                                                quality={65}
+                                                loading="lazy"
                                                 className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
                                             />
                                         </div>

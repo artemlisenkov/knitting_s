@@ -89,8 +89,8 @@ export const LandingPageContents = ({
         { label: translation.nav.welcome, href: "#home" },
         { label: translation.nav.catalog, href: "#catalog" },
         { label: translation.nav.palette, href: "#palette" },
-        { label: translation.nav.customOrder, href: "#customOrder" },
         { label: translation.nav.measurements, href: "#measurements" },
+        { label: translation.nav.customOrder, href: "#customOrder" },
         { label: translation.nav.contactDelivery, href: "#contact" },
     ];
 
@@ -151,9 +151,9 @@ export const LandingPageContents = ({
 
                 <PaletteSection palette={translation.palette} />
 
-                <CustomOrderSection customOrder={translation.customOrder} />
-
                 <MeasurementsSection measurements={translation.measurements} />
+
+                <CustomOrderSection customOrder={translation.customOrder} />
 
                 <AboutSection
                     aboutMe={translation.aboutMe}
