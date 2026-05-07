@@ -13,7 +13,7 @@ export function DevViewportSwitch({
     onModeChange: (mode: DevPreviewMode) => void;
 }) {
     return (
-        <div className="fixed left-3 top-3 z-50 flex items-center gap-1 rounded-lg border border-[#ead0d4] bg-white/85 p-1 sm:shadow-md backdrop-blur">
+        <div className="fixed bottom-3 left-3 z-50 flex items-center gap-1 rounded-lg border border-[#ead0d4] bg-white/85 p-1 sm:bottom-4 sm:left-4 sm:shadow-md backdrop-blur">
             {(["desktop", "phone"] as const).map((previewMode) => (
                 <Button
                     key={previewMode}

@@ -16,7 +16,13 @@ export const landingLanguages: Array<{
 
 type LandingTranslation = {
     brand: string;
-    nav: Record<"aboutMe" | "catalog" | "palette" | "customOrder" | "measurements" | "contactDelivery", string>;
+    nav: Record<"welcome" | "aboutMe" | "catalog" | "palette" | "customOrder" | "measurements" | "contactDelivery", string>;
+    welcome: {
+        eyebrow: string;
+        title: string;
+        description: string;
+        productAction: string;
+    };
     aboutMe: {
         eyebrow: string;
         title: string;
@@ -33,7 +39,6 @@ type LandingTranslation = {
             title: string;
             description: string;
         }>;
-        closing: string;
     };
     catalog: {
         eyebrow: string;
@@ -42,6 +47,7 @@ type LandingTranslation = {
         dynamicProductTitle: string;
         dynamicProductDescription: string;
         dynamicProductImageAlt: string;
+        kindLabels: Record<"cardigans" | "tops", string>;
         groups: Array<{
             id: "cardigans" | "tops";
             title: string;
@@ -93,16 +99,23 @@ export const landingTranslations = {
     en: {
         brand: "Crochet Makes",
         nav: {
-            aboutMe: "About me",
+            welcome: "Welcome",
+            aboutMe: "About",
             catalog: "Catalog",
             palette: "Palette",
             customOrder: "Custom",
-            measurements: "Measurements",
+            measurements: "Sizing",
             contactDelivery: "Contact",
         },
+        welcome: {
+            eyebrow: "Welcome",
+            title: "Handmade crochet tops and cardigans",
+            description: "A growing line of custom crochet pieces, made one by one in your colors and fit.",
+            productAction: "Open piece",
+        },
         aboutMe: {
-            eyebrow: "Your uniqueness starts here",
-            title: "Crochet clothing with your fit, colors, and mood",
+            eyebrow: "About",
+            title: "Crochet made for you",
             description:
                 "Each piece is made to feel considered, comfortable, and genuinely yours, with careful attention to texture, shape, and the small details that make it easy to wear.",
             primaryAction: "View catalog",
@@ -111,27 +124,30 @@ export const landingTranslations = {
         },
         customOrder: {
             eyebrow: "Made for you",
-            title: "Looking for a unique crochet piece for summer?",
+            title: "Design your own crochet piece",
             intro: "You are in the right place. I create handmade crochet clothing around your measurements, style, and vision.",
             items: [
                 {
+                    title: "Materials",
+                    description: "Soft summer yarn: 60% cotton, 40% acrylic.",
+                },
+                {
                     title: "Your fit",
-                    description: "Every piece is planned around your measurements, so it feels personal from the first fitting.",
+                    description: "Made around your measurements.",
                 },
                 {
                     title: "Your colors",
-                    description: "Choose any color or color combination from my palette, or bring your own Pinterest inspiration.",
+                    description: "Choose any colors from my palette.",
                 },
                 {
                     title: "One of a kind",
-                    description: "Each order is handmade and customized, so no one else will have exactly the same thing.",
+                    description: "Each order is handmade and unique.",
                 },
                 {
-                    title: "Summer yarn",
-                    description: "I use high-quality yarn: 60% cotton and 40% acrylic. It is soft, breathable, lightweight, hypoallergenic, and comfortable on hot days.",
+                    title: "Pinterest ideas",
+                    description: "Send Pinterest references and I will adapt them.",
                 },
             ],
-            closing: "More than clothing: made just for you.",
         },
         catalog: {
             eyebrow: "Catalog",
@@ -140,27 +156,11 @@ export const landingTranslations = {
             dynamicProductTitle: "New crochet model",
             dynamicProductDescription: "A new handmade piece added to the catalog.",
             dynamicProductImageAlt: "Crochet clothing photo",
+            kindLabels: {
+                tops: "Top",
+                cardigans: "Cardigan",
+            },
             groups: [
-                {
-                    id: "cardigans",
-                    title: "Cardigans",
-                    products: [
-                        {
-                            id: "cardigan-cloudy",
-                            title: "Cardigan Unisex",
-                            description: "A soft crochet cardigan with an airy texture and an easy layered fit.",
-                            price: staticCatalogProductPrices["cardigan-cloudy"],
-                            imageAlt: "Cardigan Unisex photo",
-                        },
-                        {
-                            id: "cardigan-sunflower",
-                            title: "Cardigan Sunflower",
-                            description: "A crochet cardigan with a bold black-and-yellow sunflower pattern.",
-                            price: staticCatalogProductPrices["cardigan-sunflower"],
-                            imageAlt: "Cardigan Sunflower photo",
-                        },
-                    ],
-                },
                 {
                     id: "tops",
                     title: "Tops",
@@ -195,12 +195,32 @@ export const landingTranslations = {
                         },
                     ],
                 },
+                {
+                    id: "cardigans",
+                    title: "Cardigans",
+                    products: [
+                        {
+                            id: "cardigan-cloudy",
+                            title: "Cardigan Unisex",
+                            description: "A soft crochet cardigan with an airy texture and an easy layered fit.",
+                            price: staticCatalogProductPrices["cardigan-cloudy"],
+                            imageAlt: "Cardigan Unisex photo",
+                        },
+                        {
+                            id: "cardigan-sunflower",
+                            title: "Cardigan Sunflower",
+                            description: "A crochet cardigan with a bold black-and-yellow sunflower pattern.",
+                            price: staticCatalogProductPrices["cardigan-sunflower"],
+                            imageAlt: "Cardigan Sunflower photo",
+                        },
+                    ],
+                },
             ],
         },
         palette: {
             eyebrow: "Color palette",
             title: "Choose the mood of your crochet piece",
-            intro: "You can choose any colors and any color combinations for any piece, so the final crochet item matches exactly what you have in mind.",
+            intro: "You can choose any colors and any combinations for any piece, so the final crochet item matches what you have in mind.",
             colors: babyCottonPaletteColors,
         },
         measurements: {
@@ -237,16 +257,23 @@ export const landingTranslations = {
     pl: {
         brand: "Crochet Makes",
         nav: {
+            welcome: "Start",
             aboutMe: "O mnie",
             catalog: "Katalog",
             palette: "Paleta",
             customOrder: "Na zamówienie",
-            measurements: "Pomiary",
+            measurements: "Miary",
             contactDelivery: "Kontakt",
         },
+        welcome: {
+            eyebrow: "Witaj",
+            title: "Ręcznie szydełkowane topy i kardigany",
+            description: "Rosnąca kolekcja szydełkowanych rzeczy, tworzonych jedna po drugiej w Twoich kolorach i dopasowaniu.",
+            productAction: "Otwórz model",
+        },
         aboutMe: {
-            eyebrow: "Twoja wyjątkowość zaczyna się tutaj",
-            title: "Szydełkowana odzież w Twoim kroju, kolorach i nastroju",
+            eyebrow: "O mnie",
+            title: "Szydełkowane rzeczy dla Ciebie",
             description:
                 "Każda rzecz powstaje tak, aby była przemyślana, wygodna i naprawdę Twoja, z uważnością na fakturę, formę oraz drobne detale, które sprawiają, że chce się ją nosić.",
             primaryAction: "Zobacz katalog",
@@ -255,27 +282,30 @@ export const landingTranslations = {
         },
         customOrder: {
             eyebrow: "Tworzone dla Ciebie",
-            title: "Szukasz wyjątkowej szydełkowanej rzeczy na lato?",
+            title: "Stwórz swoją szydełkowaną rzecz",
             intro: "Jesteś w dobrym miejscu. Tworzę ręcznie szydełkowaną odzież na podstawie Twoich wymiarów, stylu i pomysłu.",
             items: [
                 {
+                    title: "Materiały",
+                    description: "Miękka letnia włóczka: 60% bawełny, 40% akrylu.",
+                },
+                {
                     title: "Twój krój",
-                    description: "Każdy projekt dopasowuję do Twoich wymiarów, żeby od początku był naprawdę osobisty.",
+                    description: "Projekt dopasowany do Twoich wymiarów.",
                 },
                 {
                     title: "Twoje kolory",
-                    description: "Możesz wybrać dowolny kolor lub połączenie kolorów z mojej palety albo wysłać inspirację z Pinteresta.",
+                    description: "Wybierz dowolne kolory z mojej palety.",
                 },
                 {
                     title: "Jedyna taka rzecz",
-                    description: "Każde zamówienie jest robione ręcznie i personalizowane, więc nikt nie będzie mieć dokładnie tego samego.",
+                    description: "Każde zamówienie jest ręcznie robione i unikalne.",
                 },
                 {
-                    title: "Letnia włóczka",
-                    description: "Używam wysokiej jakości włóczki: 60% bawełny i 40% akrylu. Jest miękka, przewiewna, lekka, hipoalergiczna i wygodna nawet w upalne dni.",
+                    title: "Pinterest",
+                    description: "Wyślij inspiracje z Pinteresta, a dopasuję je.",
                 },
             ],
-            closing: "To więcej niż ubranie: powstaje specjalnie dla Ciebie.",
         },
         catalog: {
             eyebrow: "Katalog",
@@ -284,27 +314,11 @@ export const landingTranslations = {
             dynamicProductTitle: "Nowy model szydełkowy",
             dynamicProductDescription: "Nowa ręcznie robiona rzecz dodana do katalogu.",
             dynamicProductImageAlt: "Zdjęcie szydełkowanej odzieży",
+            kindLabels: {
+                tops: "Top",
+                cardigans: "Kardigan",
+            },
             groups: [
-                {
-                    id: "cardigans",
-                    title: "Kardigany",
-                    products: [
-                        {
-                            id: "cardigan-cloudy",
-                            title: "Cardigan Unisex",
-                            description: "Miękki szydełkowany kardigan o lekkiej fakturze i swobodnej warstwowej formie.",
-                            price: staticCatalogProductPrices["cardigan-cloudy"],
-                            imageAlt: "Zdjęcie Cardigan Unisex",
-                        },
-                        {
-                            id: "cardigan-sunflower",
-                            title: "Cardigan Sunflower",
-                            description: "Szydełkowany kardigan z wyrazistym czarno-żółtym wzorem słoneczników.",
-                            price: staticCatalogProductPrices["cardigan-sunflower"],
-                            imageAlt: "Zdjęcie Cardigan Sunflower",
-                        },
-                    ],
-                },
                 {
                     id: "tops",
                     title: "Topy",
@@ -336,6 +350,26 @@ export const landingTranslations = {
                             description: "Lekki szydełkowany top z delikatnym kwiatowym nastrojem.",
                             price: staticCatalogProductPrices["top-flower"],
                             imageAlt: "Zdjęcie Top Flower",
+                        },
+                    ],
+                },
+                {
+                    id: "cardigans",
+                    title: "Kardigany",
+                    products: [
+                        {
+                            id: "cardigan-cloudy",
+                            title: "Cardigan Unisex",
+                            description: "Miękki szydełkowany kardigan o lekkiej fakturze i swobodnej warstwowej formie.",
+                            price: staticCatalogProductPrices["cardigan-cloudy"],
+                            imageAlt: "Zdjęcie Cardigan Unisex",
+                        },
+                        {
+                            id: "cardigan-sunflower",
+                            title: "Cardigan Sunflower",
+                            description: "Szydełkowany kardigan z wyrazistym czarno-żółtym wzorem słoneczników.",
+                            price: staticCatalogProductPrices["cardigan-sunflower"],
+                            imageAlt: "Zdjęcie Cardigan Sunflower",
                         },
                     ],
                 },
@@ -381,16 +415,23 @@ export const landingTranslations = {
     uk: {
         brand: "Crochet Makes",
         nav: {
+            welcome: "Головна",
             aboutMe: "Про мене",
             catalog: "Каталог",
             palette: "Палітра",
             customOrder: "На замовлення",
-            measurements: "Мірки",
+            measurements: "Розмір",
             contactDelivery: "Контакти",
         },
+        welcome: {
+            eyebrow: "Вітаю",
+            title: "Топи й кардигани ручної роботи гачком",
+            description: "Невелика колекція речей гачком, які я створюю по одній у ваших кольорах і посадці.",
+            productAction: "Відкрити модель",
+        },
         aboutMe: {
-            eyebrow: "Твоя унікальність починається тут",
-            title: "Одяг гачком у твоїй посадці, кольорах і настрої",
+            eyebrow: "Про мене",
+            title: "Речі гачком для тебе",
             description:
                 "Кожна річ створюється так, щоб бути продуманою, комфортною й по-справжньому твоєю, з увагою до фактури, форми та маленьких деталей, які хочеться носити щодня.",
             primaryAction: "Переглянути каталог",
@@ -399,27 +440,30 @@ export const landingTranslations = {
         },
         customOrder: {
             eyebrow: "Створено для вас",
-            title: "Шукаєте унікальну річ гачком для літа?",
+            title: "Створи власну річ гачком",
             intro: "Ви в правильному місці. Я створюю одяг гачком вручну за вашими мірками, стилем і баченням.",
             items: [
                 {
+                    title: "Матеріали",
+                    description: "М'яка літня пряжа: 60% бавовни, 40% акрилу.",
+                },
+                {
                     title: "Ваша посадка",
-                    description: "Кожну річ я планую за вашими мірками, щоб вона відчувалася особистою вже з першої примірки.",
+                    description: "Річ створюється за вашими мірками.",
                 },
                 {
                     title: "Ваші кольори",
-                    description: "Можна вибрати будь-який колір або поєднання з моєї палітри чи надіслати власне натхнення з Pinterest.",
+                    description: "Оберіть будь-які кольори з моєї палітри.",
                 },
                 {
                     title: "Єдина у своєму роді",
-                    description: "Кожне замовлення створюється вручну й персоналізується, тому ніхто не матиме точно такої самої речі.",
+                    description: "Кожне замовлення ручне й унікальне.",
                 },
                 {
-                    title: "Літня пряжа",
-                    description: "Я використовую якісну пряжу: 60% бавовни та 40% акрилу. Вона м'яка, дихаюча, легка, гіпоалергенна й комфортна навіть у спеку.",
+                    title: "Pinterest",
+                    description: "Надішліть референси з Pinterest, і я адаптую їх.",
                 },
             ],
-            closing: "Це більше, ніж одяг: це річ, створена саме для вас.",
         },
         catalog: {
             eyebrow: "Каталог",
@@ -428,27 +472,11 @@ export const landingTranslations = {
             dynamicProductTitle: "Нова модель гачком",
             dynamicProductDescription: "Нова річ ручної роботи, додана до каталогу.",
             dynamicProductImageAlt: "Фото одягу гачком",
+            kindLabels: {
+                tops: "Топ",
+                cardigans: "Кардиган",
+            },
             groups: [
-                {
-                    id: "cardigans",
-                    title: "Кардигани",
-                    products: [
-                        {
-                            id: "cardigan-cloudy",
-                            title: "Cardigan Unisex",
-                            description: "М'який кардиган гачком із легкою фактурою та зручною посадкою для шарів.",
-                            price: staticCatalogProductPrices["cardigan-cloudy"],
-                            imageAlt: "Фото Cardigan Unisex",
-                        },
-                        {
-                            id: "cardigan-sunflower",
-                            title: "Cardigan Sunflower",
-                            description: "Кардиган гачком із виразним чорно-жовтим візерунком соняшників.",
-                            price: staticCatalogProductPrices["cardigan-sunflower"],
-                            imageAlt: "Фото Cardigan Sunflower",
-                        },
-                    ],
-                },
                 {
                     id: "tops",
                     title: "Топи",
@@ -480,6 +508,26 @@ export const landingTranslations = {
                             description: "Легкий топ гачком із ніжним квітковим настроєм.",
                             price: staticCatalogProductPrices["top-flower"],
                             imageAlt: "Фото Top Flower",
+                        },
+                    ],
+                },
+                {
+                    id: "cardigans",
+                    title: "Кардигани",
+                    products: [
+                        {
+                            id: "cardigan-cloudy",
+                            title: "Cardigan Unisex",
+                            description: "М'який кардиган гачком із легкою фактурою та зручною посадкою для шарів.",
+                            price: staticCatalogProductPrices["cardigan-cloudy"],
+                            imageAlt: "Фото Cardigan Unisex",
+                        },
+                        {
+                            id: "cardigan-sunflower",
+                            title: "Cardigan Sunflower",
+                            description: "Кардиган гачком із виразним чорно-жовтим візерунком соняшників.",
+                            price: staticCatalogProductPrices["cardigan-sunflower"],
+                            imageAlt: "Фото Cardigan Sunflower",
                         },
                     ],
                 },
@@ -525,16 +573,23 @@ export const landingTranslations = {
     ru: {
         brand: "Crochet Makes",
         nav: {
+            welcome: "Главная",
             aboutMe: "Обо мне",
             catalog: "Каталог",
             palette: "Палитра",
             customOrder: "На заказ",
-            measurements: "Мерки",
+            measurements: "Размер",
             contactDelivery: "Контакты",
         },
+        welcome: {
+            eyebrow: "Добро пожаловать",
+            title: "Топы и кардиганы ручной работы крючком",
+            description: "Небольшая коллекция вещей крючком, которые я создаю по одной в ваших цветах и посадке.",
+            productAction: "Открыть модель",
+        },
         aboutMe: {
-            eyebrow: "Твоя уникальность начинается здесь",
-            title: "Одежда крючком с твоей посадкой, цветами и настроением",
+            eyebrow: "Обо мне",
+            title: "Вещи крючком для тебя",
             description:
                 "Каждая вещь создается так, чтобы быть продуманной, комфортной и по-настоящему твоей, с вниманием к фактуре, форме и маленьким деталям, которые хочется носить каждый день.",
             primaryAction: "Смотреть каталог",
@@ -543,27 +598,30 @@ export const landingTranslations = {
         },
         customOrder: {
             eyebrow: "Создано для вас",
-            title: "Ищете уникальную вещь крючком на лето?",
+            title: "Создай свою вещь крючком",
             intro: "Вы в правильном месте. Я создаю одежду крючком вручную под ваши мерки, стиль и идею.",
             items: [
                 {
+                    title: "Материалы",
+                    description: "Мягкая летняя пряжа: 60% хлопка, 40% акрила.",
+                },
+                {
                     title: "Ваша посадка",
-                    description: "Каждая вещь продумывается под ваши мерки, чтобы она ощущалась личной уже с первой примерки.",
+                    description: "Вещь создается по вашим меркам.",
                 },
                 {
                     title: "Ваши цвета",
-                    description: "Можно выбрать любой цвет или сочетание из моей палитры либо прислать свое вдохновение из Pinterest.",
+                    description: "Выберите любые цвета из моей палитры.",
                 },
                 {
                     title: "Единственная в своем роде",
-                    description: "Каждый заказ создается вручную и персонализируется, поэтому ни у кого не будет точно такой же вещи.",
+                    description: "Каждый заказ ручной работы и уникален.",
                 },
                 {
-                    title: "Летняя пряжа",
-                    description: "Я использую качественную пряжу: 60% хлопка и 40% акрила. Она мягкая, дышащая, легкая, гипоаллергенная и комфортная даже в жаркие дни.",
+                    title: "Pinterest",
+                    description: "Пришлите референсы из Pinterest, и я адаптирую их.",
                 },
             ],
-            closing: "Это больше, чем одежда: вещь, созданная именно для вас.",
         },
         catalog: {
             eyebrow: "Каталог",
@@ -572,27 +630,11 @@ export const landingTranslations = {
             dynamicProductTitle: "Новая модель крючком",
             dynamicProductDescription: "Новая вещь ручной работы, добавленная в каталог.",
             dynamicProductImageAlt: "Фото одежды крючком",
+            kindLabels: {
+                tops: "Топ",
+                cardigans: "Кардиган",
+            },
             groups: [
-                {
-                    id: "cardigans",
-                    title: "Кардиганы",
-                    products: [
-                        {
-                            id: "cardigan-cloudy",
-                            title: "Cardigan Unisex",
-                            description: "Мягкий кардиган крючком с воздушной фактурой и удобной посадкой для многослойных образов.",
-                            price: staticCatalogProductPrices["cardigan-cloudy"],
-                            imageAlt: "Фото Cardigan Unisex",
-                        },
-                        {
-                            id: "cardigan-sunflower",
-                            title: "Cardigan Sunflower",
-                            description: "Кардиган крючком с выразительным черно-желтым узором подсолнухов.",
-                            price: staticCatalogProductPrices["cardigan-sunflower"],
-                            imageAlt: "Фото Cardigan Sunflower",
-                        },
-                    ],
-                },
                 {
                     id: "tops",
                     title: "Топы",
@@ -624,6 +666,26 @@ export const landingTranslations = {
                             description: "Легкий топ крючком с нежным цветочным настроением.",
                             price: staticCatalogProductPrices["top-flower"],
                             imageAlt: "Фото Top Flower",
+                        },
+                    ],
+                },
+                {
+                    id: "cardigans",
+                    title: "Кардиганы",
+                    products: [
+                        {
+                            id: "cardigan-cloudy",
+                            title: "Cardigan Unisex",
+                            description: "Мягкий кардиган крючком с воздушной фактурой и удобной посадкой для многослойных образов.",
+                            price: staticCatalogProductPrices["cardigan-cloudy"],
+                            imageAlt: "Фото Cardigan Unisex",
+                        },
+                        {
+                            id: "cardigan-sunflower",
+                            title: "Cardigan Sunflower",
+                            description: "Кардиган крючком с выразительным черно-желтым узором подсолнухов.",
+                            price: staticCatalogProductPrices["cardigan-sunflower"],
+                            imageAlt: "Фото Cardigan Sunflower",
                         },
                     ],
                 },

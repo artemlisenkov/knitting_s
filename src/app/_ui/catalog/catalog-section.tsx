@@ -5,72 +5,18 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState, type RefObject } from "react";
 import { Button, buttonVariants } from "@/src/components/ui/button";
 import { Dialog } from "@/src/components/ui/dialog";
-import { toPublicAssetPath } from "@/src/lib/public-asset-path";
 import { cn } from "@/src/lib/utils";
+import {
+    getGroupDisplayProducts,
+} from "@/src/app/_ui/catalog/catalog-display-products";
 import { CatalogMobileProductPage } from "@/src/app/_ui/catalog/catalog-mobile-product-page";
 import { CatalogProductDialog } from "@/src/app/_ui/catalog/catalog-product-dialog";
 import { CatalogProductPrice } from "@/src/app/_ui/catalog/catalog-product-price";
 import type { PublishedCatalogProduct } from "@/src/app/_data/catalog-products";
-import type { CatalogDisplayProduct, CatalogDisplayProductImage } from "@/src/app/_ui/catalog/catalog-product-types";
 import type { LandingCatalogGroup, LandingCopy } from "@/src/app/_ui/landing/landing-types";
 import { useIsMobile } from "@/src/hooks/use-mobile";
 
-type StaticCatalogProductId = LandingCatalogGroup["products"][number]["id"];
-
-const staticCatalogProductGalleries: Record<StaticCatalogProductId, string[]> = {
-    "cardigan-cloudy": [
-        "/catalog/cardigans/unisex/cardigan-unisex.jpg",
-        "/catalog/cardigans/unisex/cardigan-unisex-front-alt.jpg",
-        "/catalog/cardigans/unisex/cardigan-unisex-side.jpg",
-        "/catalog/cardigans/unisex/cardigan-unisex-back.jpg",
-        "/catalog/cardigans/unisex/cardigan-unisex-front-alt-02.jpg",
-    ],
-    "cardigan-sunflower": [
-        "/catalog/cardigans/sunflower/cardigan-sunflower.jpg",
-        "/catalog/cardigans/sunflower/cardigan-sunflower-side.jpg",
-        "/catalog/cardigans/sunflower/cardigan-sunflower-back-alt.jpg",
-        "/catalog/cardigans/sunflower/cardigan-sunflower-back.jpg",
-    ],
-    "top-zebra": [
-        "/catalog/tops/zebra/top-zebra.jpg",
-        "/catalog/tops/zebra/top-zebra-alt.jpg",
-        "/catalog/tops/zebra/top-zebra-back.jpg",
-    ],
-    "top-browny": [
-        "/catalog/tops/browny/top-browny.jpg",
-        "/catalog/tops/browny/top-browny-side.jpg",
-        "/catalog/tops/browny/top-browny-back.jpg",
-    ],
-    "top-gradient": [
-        "/catalog/tops/gradient/top-gradient.jpg",
-        "/catalog/tops/gradient/top-gradient-alt.jpg",
-        "/catalog/tops/gradient/top-gradient-back.jpg",
-        "/catalog/tops/gradient/top-gradient-back-alt.jpg",
-        "/catalog/tops/gradient/top-gradient-side.jpg",
-        "/catalog/tops/gradient/top-gradient-side-alt.jpg",
-    ],
-    "top-flower": [
-        "/catalog/tops/flower/top-flower.jpg",
-        "/catalog/tops/flower/top-flower-front-alt.jpg",
-        "/catalog/tops/flower/top-flower-back.jpg",
-    ],
-};
-
 const catalogPageSize = 4;
-
-const createProductGallery = (
-    primaryImage: CatalogDisplayProductImage,
-    extraImages: CatalogDisplayProductImage[] = []
-) => {
-    const imagePaths = new Set<string>();
-
-    return [primaryImage, ...extraImages].filter((image) => {
-        if (imagePaths.has(image.src)) return false;
-
-        imagePaths.add(image.src);
-        return true;
-    });
-};
 
 export function CatalogSection({
     catalog,
@@ -78,12 +24,18 @@ export function CatalogSection({
     databaseProducts,
     isCatalogVisible,
     isAdminView,
+    selectedProductId,
+    onOpenProduct,
+    onCloseProduct,
 }: {
     catalog: LandingCopy["catalog"];
     catalogRef: RefObject<HTMLElement | null>;
     databaseProducts: PublishedCatalogProduct[];
     isCatalogVisible: boolean;
     isAdminView: boolean;
+    selectedProductId: string | null;
+    onOpenProduct: (productId: string) => void;
+    onCloseProduct: () => void;
 }) {
     return (
         <section ref={catalogRef} id="catalog" className="scroll-mt-16 px-4 pt-10 pb-14 sm:px-6">
@@ -91,7 +43,7 @@ export function CatalogSection({
                 <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#994d59]">
                     {catalog.eyebrow}
                 </p>
-                <h2 className="mt-3 max-w-2xl text-3xl font-semibold text-[#2c2426]">
+                <h2 className="font-heading mt-3 max-w-2xl text-3xl font-semibold text-[#2c2426]">
                     {catalog.title}
                 </h2>
 
@@ -107,6 +59,9 @@ export function CatalogSection({
                             emptyText={catalog.emptyText}
                             isVisible={isCatalogVisible}
                             isAdminView={isAdminView}
+                            selectedProductId={selectedProductId}
+                            onOpenProduct={onOpenProduct}
+                            onCloseProduct={onCloseProduct}
                         />
                     ))}
                 </div>
@@ -124,6 +79,9 @@ function CatalogProductGroup({
     emptyText,
     isVisible,
     isAdminView,
+    selectedProductId,
+    onOpenProduct,
+    onCloseProduct,
 }: {
     group: LandingCatalogGroup;
     databaseProducts: PublishedCatalogProduct[];
@@ -133,55 +91,22 @@ function CatalogProductGroup({
     emptyText: string;
     isVisible: boolean;
     isAdminView: boolean;
+    selectedProductId: string | null;
+    onOpenProduct: (productId: string) => void;
+    onCloseProduct: () => void;
 }) {
     const isMobile = useIsMobile();
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
     const [page, setPage] = useState(0);
-    const [selectedProductId, setSelectedProductId] = useState<string | null>(null);
-    const products: CatalogDisplayProduct[] = [
-        ...group.products.map((product) => {
-            const galleryImages = staticCatalogProductGalleries[product.id].map((src, index) => ({
-                id: `${product.id}-${index}`,
-                src: toPublicAssetPath(src),
-                alt: product.imageAlt,
-            }));
-            const imageSrc = galleryImages[0].src;
-
-            return {
-                ...product,
-                imageSrc,
-                galleryImages: createProductGallery(galleryImages[0], galleryImages.slice(1)),
-            };
-        }),
-        ...databaseProducts
-            .filter((product) => product.category === group.id)
-            .map((product) => {
-                const imageAlt = product.imageAlt ?? product.title ?? fallbackProductImageAlt;
-
-                return {
-                    id: product.id,
-                    title: product.title ?? fallbackProductTitle,
-                    description: product.description ?? fallbackProductDescription,
-                    price: product.pricePln === null ? null : `${product.pricePln} pln`,
-                    imageAlt,
-                    imageSrc: toPublicAssetPath(product.imagePath),
-                    galleryImages: createProductGallery(
-                        {
-                            id: `${product.id}-primary`,
-                            src: toPublicAssetPath(product.imagePath),
-                            alt: imageAlt,
-                        },
-                        product.galleryImages.map((image) => ({
-                            id: image.id,
-                            src: toPublicAssetPath(image.imagePath),
-                            alt: image.imageAlt ?? imageAlt,
-                        }))
-                    ),
-                };
-            }),
-    ];
+    const products = getGroupDisplayProducts({
+        group,
+        databaseProducts,
+        fallbackProductTitle,
+        fallbackProductDescription,
+        fallbackProductImageAlt,
+    });
     const mobileSelectedProductId = searchParams.get("product");
     const mobileSelectedProduct = isMobile
         ? products.find((product) => product.id === mobileSelectedProductId) ?? null
@@ -191,23 +116,6 @@ function CatalogProductGroup({
     const pageProducts = products.slice(page * catalogPageSize, (page + 1) * catalogPageSize);
 
     const showNextPage = () => setPage((currentPage) => (currentPage + 1) % pageCount);
-    const createProductHref = (productId: string) => {
-        const params = new URLSearchParams(searchParams.toString());
-
-        params.set("product", productId);
-
-        const query = params.toString();
-
-        return query ? `${pathname}?${query}` : pathname;
-    };
-    const openProduct = (productId: string) => {
-        if (isMobile) {
-            router.push(createProductHref(productId), { scroll: false });
-            return;
-        }
-
-        setSelectedProductId(productId);
-    };
     const closeMobileProductPage = () => {
         if (!mobileSelectedProductId) return;
 
@@ -229,7 +137,7 @@ function CatalogProductGroup({
         <section aria-label={group.title}>
             <div className="mb-5 flex items-end justify-between gap-4">
                 <div className="flex items-center gap-3">
-                    <h3 className="font-serif text-3xl leading-none text-[#2c2426] sm:text-4xl">
+                    <h3 className="font-heading text-3xl font-semibold leading-none text-[#2c2426] sm:text-4xl">
                         {group.title}
                     </h3>
                     {isAdminView ? (
@@ -259,7 +167,7 @@ function CatalogProductGroup({
                                     type="button"
                                     className="group block w-full min-w-0 rounded-md text-left outline-none focus-visible:ring-2 focus-visible:ring-[#994d59] focus-visible:ring-offset-4 focus-visible:ring-offset-[#f8eef0]"
                                     aria-label={`Open ${product.title}`}
-                                    onClick={() => openProduct(product.id)}
+                                    onClick={() => onOpenProduct(product.id)}
                                 >
                                     <div className="overflow-hidden rounded-md border border-[#d78d98] bg-[#fffaf8] p-1.5 shadow-none transition-all duration-200 group-hover:-translate-y-1 sm:group-hover:shadow-md sm:p-2 lg:shadow-[8px_8px_0_rgba(176,91,102,0.12)]">
                                         <div className="relative aspect-3/4 overflow-hidden rounded-md bg-white">
@@ -294,7 +202,7 @@ function CatalogProductGroup({
                         <Dialog
                             open={selectedProduct !== null}
                             onOpenChange={(isOpen) => {
-                                if (!isOpen) setSelectedProductId(null);
+                                if (!isOpen) onCloseProduct();
                             }}
                         >
                             {selectedProduct ? (

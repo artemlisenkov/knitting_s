@@ -14,7 +14,7 @@ export function ContactDeliverySection({
                 <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#994d59]">
                     {contactDelivery.eyebrow}
                 </p>
-                <h2 className="mt-3 text-3xl font-semibold text-[#2c2426]">
+                <h2 className="font-heading mt-3 text-3xl font-semibold text-[#2c2426]">
                     {contactDelivery.title}
                 </h2>
                 <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-[#5f5154]">

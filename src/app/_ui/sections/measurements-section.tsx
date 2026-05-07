@@ -11,10 +11,23 @@ export function MeasurementsSection({
     return (
         <section id="measurements" className="scroll-mt-16 border-y border-[#ead0d4] bg-white/50 px-4 py-14 sm:px-6">
             <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[0.96fr_1.04fr] lg:items-center">
-                <div className="order-2 lg:order-1">
-                    <h2 className="mx-auto max-w-2xl text-center font-serif text-3xl leading-tight text-[#2c2426] sm:text-3xl">
+                <div>
+                    <h2 className="font-heading mx-auto max-w-2xl text-center text-3xl font-semibold leading-tight text-[#2c2426] sm:text-3xl">
                         {measurements.title}
                     </h2>
+
+                    <div className="mx-auto mt-6 w-full max-w-sm rounded-md border border-[#d78d98] bg-[#fffaf8] p-4 lg:hidden">
+                        <div className="relative aspect-[4/5] overflow-hidden rounded-md bg-white">
+                            <Image
+                                src="/main/measurements.jpg"
+                                alt={measurements.imageAlt}
+                                fill
+                                sizes="100vw"
+                                unoptimized
+                                className="h-full w-full object-contain p-2"
+                            />
+                        </div>
+                    </div>
 
                     <div className="mt-8 rounded-md border border-[#d78d98] bg-[#fffaf8] p-6 sm:shadow-[10px_10px_0_rgba(176,91,102,0.14)] sm:p-8">
                         <div className="grid gap-5">
@@ -23,7 +36,7 @@ export function MeasurementsSection({
                                 key={item.title}
                                 className="grid gap-4 border-t border-[#ead0d4] pt-5 first:border-t-0 first:pt-0 sm:grid-cols-[3.25rem_1fr] sm:items-start"
                             >
-                                <div className="flex size-12 items-center justify-center rounded-full border border-[#d88c98] bg-white font-serif text-xl font-semibold text-[#994d59]">
+                                <div className="font-heading flex size-12 items-center justify-center rounded-full border border-[#d88c98] bg-white text-xl font-semibold text-[#994d59]">
                                     {String(index + 1).padStart(2, "0")}
                                 </div>
                                 <div>
@@ -43,7 +56,7 @@ export function MeasurementsSection({
                     </div>
                 </div>
 
-                <div className="order-1 lg:order-2">
+                <div className="hidden lg:block">
                     <div className="mx-auto w-full max-w-sm rounded-md border border-[#d78d98] bg-[#fffaf8] p-4 sm:shadow-[10px_10px_0_rgba(176,91,102,0.14)] sm:max-w-md sm:p-5">
                         <div className="relative aspect-[4/5] overflow-hidden rounded-md bg-white">
                             <Image

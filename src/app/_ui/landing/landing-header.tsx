@@ -43,12 +43,14 @@ export function LandingHeader({
     navItems,
     language,
     isAdminView,
+    isHidden = false,
     onLanguageChange,
 }: {
     brand: string;
     navItems: LandingNavItem[];
     language: LandingLanguage;
     isAdminView: boolean;
+    isHidden?: boolean;
     onLanguageChange: (language: LandingLanguage) => void;
 }) {
     const hasPendingAdminChanges = useSyncExternalStore(
@@ -87,12 +89,20 @@ export function LandingHeader({
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    useEffect(() => {
+        if (!isHidden) return;
+
+        setIsMobileMenuOpen(false);
+    }, [isHidden]);
+
     return (
         <>
             <div
                 className={cn(
-                    "pointer-events-none fixed inset-x-0 top-0 z-30 px-4 transition-all duration-300 ease-out sm:hidden",
-                    isMobileChromeVisible ? "translate-y-0 opacity-100" : "-translate-y-[140%] opacity-0"
+                    "pointer-events-none fixed inset-x-0 top-0 z-[70] px-4 transition-all duration-300 ease-out sm:hidden",
+                    !isHidden && isMobileChromeVisible
+                        ? "translate-y-0 opacity-100"
+                        : "-translate-y-[140%] opacity-0"
                 )}
                 style={{ paddingTop: "calc(env(safe-area-inset-top, 0px) + 0.5rem)" }}
             >
@@ -131,10 +141,15 @@ export function LandingHeader({
                 </div>
             </div>
 
-            <header className="hidden sticky top-0 z-20 border-b border-white/50 bg-white/45 backdrop-blur-md sm:block">
+            <header
+                className={cn(
+                    "hidden sticky top-0 z-[70] border-b border-white/50 bg-white/45 backdrop-blur-md transition-opacity duration-200 sm:block",
+                    isHidden && "pointer-events-none opacity-0"
+                )}
+            >
                 <nav className="mx-auto max-w-6xl px-4 sm:px-6">
                     <div className="hidden grid-cols-[1fr_auto_1fr] items-center gap-4 sm:grid sm:min-h-12">
-                        <a href="#aboutMe" className="text-sm font-semibold uppercase tracking-[0.18em] text-[#994d59]">
+                        <a href="#home" className="text-sm font-semibold uppercase tracking-[0.18em] text-[#994d59]">
                             {brand}
                         </a>
 
@@ -209,7 +224,7 @@ export function LandingHeader({
             <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
                 <SheetContent
                     side="left"
-                    className="!shadow-none w-[82vw] max-w-[320px] border-r border-[#ead0d4] bg-white/82 p-0 backdrop-blur-md sm:!shadow-lg"
+                    className="!shadow-none z-[75] w-[82vw] max-w-[320px] border-r border-[#ead0d4] bg-white/82 p-0 backdrop-blur-md sm:!shadow-lg"
                 >
                     <SheetHeader className="border-b border-[#ead0d4] px-4 py-4">
                         <SheetTitle className="text-sm font-semibold uppercase tracking-[0.18em] text-[#994d59]">

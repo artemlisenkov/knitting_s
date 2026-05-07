@@ -1,10 +1,9 @@
 "use client"
 
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { CatalogSection } from "@/src/app/_ui/catalog/catalog-section";
 import { AboutSection } from "@/src/app/_ui/sections/about-section";
-import { ContactDeliverySection } from "@/src/app/_ui/sections/contact-delivery-section";
 import { CustomOrderSection } from "@/src/app/_ui/sections/custom-order-section";
 import {
     DevViewportSwitch,
@@ -17,7 +16,9 @@ import {
 } from "@/src/app/_ui/landing/landing-translations";
 import { MeasurementsSection } from "@/src/app/_ui/sections/measurements-section";
 import { PaletteSection } from "@/src/app/_ui/sections/palette-section";
+import { WelcomeSection } from "@/src/app/_ui/sections/welcome-section";
 import type { PublishedCatalogProduct } from "@/src/app/_data/catalog-products";
+import { useIsMobile } from "@/src/hooks/use-mobile";
 
 export const LandingPageContents = ({
     isAdminView = false,
@@ -29,13 +30,17 @@ export const LandingPageContents = ({
     const [language, setLanguage] = useState<LandingLanguage>("en");
     const [isCatalogVisible, setIsCatalogVisible] = useState(false);
     const [devPreviewMode, setDevPreviewMode] = useState<DevPreviewMode>("desktop");
+    const [selectedProductId, setSelectedProductId] = useState<string | null>(null);
     const catalogRef = useRef<HTMLElement | null>(null);
+    const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
+    const isMobile = useIsMobile();
     const translation = landingTranslations[language];
     const isDevelopment = process.env.NODE_ENV === "development";
     const isDevPreviewFrame = searchParams.has("devViewport");
     const canUseDevPreview = isAdminView && isDevelopment && !isDevPreviewFrame;
+    const isProductOverlayOpen = selectedProductId !== null || searchParams.get("product") !== null;
 
     useEffect(() => {
         document.documentElement.lang = language;
@@ -61,13 +66,32 @@ export const LandingPageContents = ({
         return () => observer.disconnect();
     }, []);
 
+    const createProductHref = (productId: string) => {
+        const params = new URLSearchParams(searchParams.toString());
+
+        params.set("product", productId);
+
+        const query = params.toString();
+
+        return query ? `${pathname}?${query}` : pathname;
+    };
+
+    const openProduct = (productId: string) => {
+        if (isMobile) {
+            router.push(createProductHref(productId), { scroll: false });
+            return;
+        }
+
+        setSelectedProductId(productId);
+    };
+
     const navItems = [
-        { label: translation.nav.aboutMe, href: "#aboutMe" },
+        { label: translation.nav.welcome, href: "#home" },
         { label: translation.nav.catalog, href: "#catalog" },
         { label: translation.nav.palette, href: "#palette" },
         { label: translation.nav.customOrder, href: "#customOrder" },
         { label: translation.nav.measurements, href: "#measurements" },
-        { label: translation.nav.contactDelivery, href: "#contactDelivery" },
+        { label: translation.nav.contactDelivery, href: "#contact" },
     ];
 
     if (canUseDevPreview && devPreviewMode === "phone") {
@@ -96,6 +120,7 @@ export const LandingPageContents = ({
                 navItems={navItems}
                 language={language}
                 isAdminView={isAdminView}
+                isHidden={isProductOverlayOpen}
                 onLanguageChange={setLanguage}
             />
 
@@ -106,7 +131,12 @@ export const LandingPageContents = ({
                     </div>
                 ) : null}
 
-                <AboutSection aboutMe={translation.aboutMe} secondaryActionHref="#contactDelivery" />
+                <WelcomeSection
+                    welcome={translation.welcome}
+                    catalog={translation.catalog}
+                    databaseProducts={databaseProducts}
+                    onOpenProduct={openProduct}
+                />
 
                 <CatalogSection
                     catalog={translation.catalog}
@@ -114,6 +144,9 @@ export const LandingPageContents = ({
                     databaseProducts={databaseProducts}
                     isCatalogVisible={isCatalogVisible}
                     isAdminView={isAdminView}
+                    selectedProductId={selectedProductId}
+                    onOpenProduct={openProduct}
+                    onCloseProduct={() => setSelectedProductId(null)}
                 />
 
                 <PaletteSection palette={translation.palette} />
@@ -122,7 +155,10 @@ export const LandingPageContents = ({
 
                 <MeasurementsSection measurements={translation.measurements} />
 
-                <ContactDeliverySection contactDelivery={translation.contactDelivery} />
+                <AboutSection
+                    aboutMe={translation.aboutMe}
+                    contactDelivery={translation.contactDelivery}
+                />
             </main>
         </div>
     );

@@ -21,7 +21,7 @@ export function CatalogProductDialog({
                     <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#994d59]">
                         {categoryTitle}
                     </p>
-                    <DialogTitle className="mt-4 font-serif text-4xl leading-tight text-[#2c2426] sm:text-5xl">
+                    <DialogTitle className="font-heading mt-4 text-4xl font-semibold leading-tight text-[#2c2426] sm:text-5xl">
                         {product.title}
                     </DialogTitle>
                     {product.price ? (

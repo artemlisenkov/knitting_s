@@ -1,27 +1,26 @@
 "use client"
 
 import Image from "next/image";
-import { buttonVariants } from "@/src/components/ui/button";
+import { FaInstagram, FaTelegramPlane } from "react-icons/fa";
 import { toPublicAssetPath } from "@/src/lib/public-asset-path";
-import { cn } from "@/src/lib/utils";
 import type { LandingCopy } from "@/src/app/_ui/landing/landing-types";
 
 export function AboutSection({
     aboutMe,
-    secondaryActionHref = "#contactDelivery",
+    contactDelivery,
 }: {
     aboutMe: LandingCopy["aboutMe"];
-    secondaryActionHref?: string;
+    contactDelivery: LandingCopy["contactDelivery"];
 }) {
     return (
-        <section id="aboutMe" className="scroll-mt-16 border-b border-[#ead0d4] bg-white/50 px-4 pt-6 pb-3 sm:px-6 lg:pt-8 lg:pb-5">
-            <div className="mx-auto grid w-full max-w-6xl items-center gap-8 lg:min-h-[calc(100vh-6rem)] lg:grid-cols-[1.06fr_0.94fr]">
-                <div className="order-2 flex flex-col items-center text-center lg:order-1 lg:items-start lg:text-left">
+        <section id="contact" className="scroll-mt-16 border-b border-[#ead0d4] bg-[#f8eef0] pl-1 pr-4 py-6 sm:pl-2 sm:pr-6 sm:py-7 lg:pl-2 lg:pr-6 lg:py-8">
+            <div className="mx-auto grid w-full max-w-6xl items-center gap-5 lg:ml-0 lg:mr-auto lg:grid-cols-[minmax(0,1fr)_26rem] lg:gap-5">
+                <div className="order-2 flex flex-col items-center text-center lg:order-1">
                     <p className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-[#b05b66]">
-                        {aboutMe.eyebrow}
+                        {contactDelivery.eyebrow}
                     </p>
 
-                    <h1 className="max-w-2xl text-4xl font-semibold leading-tight text-[#2c2426] sm:text-5xl lg:text-6xl">
+                    <h1 className="font-heading max-w-xl text-3xl font-semibold leading-tight text-[#2c2426] sm:text-4xl lg:text-[2.75rem]">
                         {aboutMe.title}
                     </h1>
 
@@ -31,30 +30,37 @@ export function AboutSection({
                         {aboutMe.description}
                     </p>
 
-                    <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                    <div className="mt-8 flex w-full max-w-xl flex-col items-center">
+                        <div className="h-px w-full max-w-[220px] bg-[#ead0d4]" />
+                        <p className="mt-4 max-w-xl text-base leading-7 text-[#5f5154] sm:text-lg">
+                            {contactDelivery.intro}
+                        </p>
+                    </div>
+
+                    <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:justify-center">
                         <a
-                            href="#catalog"
-                            className={cn(
-                                buttonVariants(),
-                                "bg-[#b05b66] px-5 text-white sm:shadow-sm hover:-translate-y-0.5 hover:rounded-lg hover:bg-[#994d59] sm:hover:shadow-md"
-                            )}
+                            href={contactDelivery.instagramHref}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="flex min-w-[180px] items-center justify-center gap-3 rounded-md border border-[#ead0d4] bg-[#fffaf8] px-4 py-3 text-[#2c2426] transition-colors hover:border-[#d88c98] hover:bg-white"
                         >
-                            {aboutMe.primaryAction}
+                            <FaInstagram className="size-5 text-[#994d59]" aria-hidden="true" />
+                            <span className="text-sm font-semibold">{contactDelivery.instagramLabel}</span>
                         </a>
                         <a
-                            href={secondaryActionHref}
-                            className={cn(
-                                buttonVariants({ variant: "outline" }),
-                                "border-[#d9a0a8] bg-white/45 px-5 text-[#6c3f46] hover:-translate-y-0.5 hover:rounded-lg hover:border-[#b05b66] hover:bg-white hover:text-[#994d59] sm:hover:shadow-md"
-                            )}
+                            href={contactDelivery.telegramHref}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="flex min-w-[180px] items-center justify-center gap-3 rounded-md border border-[#ead0d4] bg-[#fffaf8] px-4 py-3 text-[#2c2426] transition-colors hover:border-[#d88c98] hover:bg-white"
                         >
-                            {aboutMe.secondaryAction}
+                            <FaTelegramPlane className="size-5 text-[#994d59]" aria-hidden="true" />
+                            <span className="text-sm font-semibold">{contactDelivery.telegramLabel}</span>
                         </a>
                     </div>
                 </div>
 
                 <div className="order-1 lg:order-2">
-                    <div className="group/photo ml-auto max-w-md overflow-hidden rounded-md border border-[#d78d98] bg-[#fffaf8] p-3 sm:shadow-[12px_12px_0_rgba(176,91,102,0.2)]">
+                    <div className="group/photo mx-auto max-w-[22rem] overflow-hidden rounded-md border border-[#d78d98] bg-[#fffaf8] p-3 sm:max-w-[24rem] sm:shadow-[12px_12px_0_rgba(176,91,102,0.2)] lg:mx-0 lg:max-w-[26rem]">
                         <div className="relative aspect-[4/5] overflow-hidden rounded-md bg-white">
                             <Image
                                 src={toPublicAssetPath("/main/portfolio_kate.jpg")}
@@ -67,10 +73,10 @@ export function AboutSection({
                             />
                         </div>
                         <div className="px-1 pb-2 pt-5 text-left">
-                            <p className="font-serif text-3xl font-bold uppercase leading-none tracking-[0.08em] text-[#2c2426]">
+                            <p className="font-heading text-3xl font-semibold uppercase leading-none tracking-[0.08em] text-[#2c2426]">
                                 Kate
                             </p>
-                            <p className="mt-2 font-serif text-2xl leading-none text-[#2c2426]">
+                            <p className="font-heading mt-2 text-2xl font-medium leading-none text-[#2c2426]">
                                 Crochet Maker
                             </p>
                         </div>

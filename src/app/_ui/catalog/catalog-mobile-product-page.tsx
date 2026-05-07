@@ -60,7 +60,7 @@ export function CatalogMobileProductPage({
                         </div>
 
                         <div className="mt-4 rounded-md border border-[#d78d98] bg-[#fffaf8] p-5">
-                            <h2 className="font-serif text-4xl leading-tight text-[#2c2426]">
+                            <h2 className="font-heading text-4xl font-semibold leading-tight text-[#2c2426]">
                                 {product.title}
                             </h2>
                             {product.price ? (

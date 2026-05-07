@@ -78,7 +78,7 @@ export function PaletteSection({
                     <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#994d59]">
                         {palette.eyebrow}
                     </p>
-                    <h2 className="mt-3 max-w-2xl text-3xl font-semibold text-[#2c2426]">
+                    <h2 className="font-heading mt-3 max-w-2xl text-3xl font-semibold text-[#2c2426]">
                         {palette.title}
                     </h2>
                     <p className="mt-5 max-w-xl text-base leading-7 text-[#5f5154]">
