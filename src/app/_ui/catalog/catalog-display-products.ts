@@ -82,7 +82,14 @@ export function getGroupDisplayProducts({
 
 export type WelcomeDisplayProduct = CatalogDisplayProduct & {
     kindLabel: string;
+    shortTitle: string;
 };
+
+const getWelcomeShortTitle = (title: string) =>
+    title
+        .replace(/^top\s+/i, "")
+        .replace(/^cardigan\s+/i, "")
+        .trim();
 
 export function getWelcomeDisplayProducts({
     catalog,
@@ -105,6 +112,7 @@ export function getWelcomeDisplayProducts({
         }).map((product) => ({
             ...product,
             kindLabel: categoryLabels.get(group.id) ?? group.title,
+            shortTitle: getWelcomeShortTitle(product.title),
         }))
     ) satisfies WelcomeDisplayProduct[];
 }

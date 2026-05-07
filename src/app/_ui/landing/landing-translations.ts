@@ -1,5 +1,4 @@
 import {static_products} from "@/public/catalog/catalog.types";
-import { babyCottonPaletteColors, type PaletteColor } from "@/src/app/_ui/landing/palette-colors";
 
 export type LandingLanguage = "pl" | "en" | "uk" | "ru";
 
@@ -64,7 +63,7 @@ type LandingTranslation = {
         eyebrow: string;
         title: string;
         intro: string;
-        colors: PaletteColor[];
+        emptyText: string;
     };
     measurements: {
         title: string;
@@ -221,7 +220,7 @@ export const landingTranslations = {
             eyebrow: "Color palette",
             title: "Choose the mood of your crochet piece",
             intro: "You can choose any colors and any combinations for any piece, so the final crochet item matches what you have in mind.",
-            colors: babyCottonPaletteColors,
+            emptyText: "More palette photos are coming soon.",
         },
         measurements: {
             title: "HOW TO MEASURE YOUR BODY",
@@ -379,7 +378,7 @@ export const landingTranslations = {
             eyebrow: "Paleta kolorów",
             title: "Wybierz nastrój swojej szydełkowanej rzeczy",
             intro: "Możesz wybrać dowolne kolory i dowolne ich połączenia do każdej rzeczy, tak aby gotowy szydełkowany projekt dokładnie odpowiadał Twojemu pomysłowi.",
-            colors: babyCottonPaletteColors,
+            emptyText: "Kolejne zdjęcia palet pojawią się wkrótce.",
         },
         measurements: {
             title: "JAK ZMIERZYĆ CIAŁO",
@@ -537,7 +536,7 @@ export const landingTranslations = {
             eyebrow: "Палітра кольорів",
             title: "Оберіть настрій своєї речі гачком",
             intro: "Ви можете обрати будь-які кольори та будь-які їх поєднання для будь-якої речі, щоб готовий виріб гачком точно відповідав вашій задумці.",
-            colors: babyCottonPaletteColors,
+            emptyText: "Інші фото палітр з’являться незабаром.",
         },
         measurements: {
             title: "ЯК ЗНЯТИ МІРКИ З ТІЛА",
@@ -695,7 +694,7 @@ export const landingTranslations = {
             eyebrow: "Палитра цветов",
             title: "Выберите настроение своей вещи крючком",
             intro: "Вы можете выбрать любые цвета и любые их сочетания для любой вещи, чтобы готовое изделие крючком точно соответствовало вашей задумке.",
-            colors: babyCottonPaletteColors,
+            emptyText: "Другие фото палитр появятся скоро.",
         },
         measurements: {
             title: "КАК СНЯТЬ МЕРКИ",

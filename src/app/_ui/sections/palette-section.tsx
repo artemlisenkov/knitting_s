@@ -3,6 +3,11 @@
 import { ChevronDownIcon } from "lucide-react";
 import Image from "next/image";
 import { useLayoutEffect, useRef, useState } from "react";
+import {
+    paletteCollections,
+    type PaletteCollection,
+    type PaletteSetId,
+} from "@/src/app/_ui/landing/palette-colors";
 import type { LandingCopy } from "@/src/app/_ui/landing/landing-types";
 import { Button } from "@/src/components/ui/button";
 
@@ -12,10 +17,14 @@ export function PaletteSection({
     palette: LandingCopy["palette"];
 }) {
     const gridRef = useRef<HTMLDivElement | null>(null);
+    const [selectedPaletteId, setSelectedPaletteId] = useState<PaletteSetId>("baby-cotton");
     const [isExpanded, setIsExpanded] = useState(false);
     const [fullHeight, setFullHeight] = useState(0);
     const [collapsedHeight, setCollapsedHeight] = useState<number | null>(null);
     const [cardHeight, setCardHeight] = useState(0);
+    const selectedPalette =
+        paletteCollections.find((collection) => collection.id === selectedPaletteId) ??
+        paletteCollections[0];
 
     useLayoutEffect(() => {
         const grid = gridRef.current;
@@ -66,7 +75,7 @@ export function PaletteSection({
         return () => {
             resizeObserver.disconnect();
         };
-    }, [palette.colors.length]);
+    }, [selectedPalette.colors.length, selectedPalette.id, selectedPalette.variant]);
 
     const canExpand = collapsedHeight !== null && fullHeight - collapsedHeight > 8;
     const visibleHeight = isExpanded || !canExpand ? fullHeight : collapsedHeight;
@@ -87,32 +96,61 @@ export function PaletteSection({
                 </div>
 
                 <div>
+                    <div className="mb-5 grid grid-cols-3 gap-2">
+                        {paletteCollections.map((collection) => (
+                            <Button
+                                key={collection.id}
+                                type="button"
+                                variant="outline"
+                                size="sm"
+                                className={`h-9 rounded-full border-[#d9bcc1] px-3 text-xs uppercase tracking-[0.08em] ${
+                                    collection.id === selectedPaletteId
+                                        ? "bg-[#fff4f6] text-[#5f5154]"
+                                        : "bg-white/70 text-[#7a6a6f] hover:bg-white hover:text-[#5f5154]"
+                                }`}
+                                aria-pressed={collection.id === selectedPaletteId}
+                                onClick={() => {
+                                    setSelectedPaletteId(collection.id);
+                                    setIsExpanded(false);
+                                }}
+                            >
+                                {collection.label}
+                            </Button>
+                        ))}
+                    </div>
+
                     <div
                         className="relative overflow-hidden transition-[max-height] duration-500 ease-in-out"
                         style={{ maxHeight: `${visibleHeight}px` }}
                     >
-                        <div ref={gridRef} className="grid grid-cols-3 gap-3 sm:grid-cols-4 xl:grid-cols-5">
-                            {palette.colors.map((color) => (
-                                <div
-                                    key={color.code}
-                                    className="rounded-md border border-[#ead0d4] bg-[#fffaf8] p-2"
-                                >
-                                    <div className="relative aspect-square overflow-hidden rounded-sm border border-black/5 bg-white">
-                                        <Image
-                                            src={color.imageSrc}
-                                            alt={color.imageAlt}
-                                            fill
-                                            sizes="(min-width: 1280px) 10vw, (min-width: 640px) 18vw, 28vw"
-                                            unoptimized
-                                            className="h-full w-full object-contain p-1"
-                                        />
-                                    </div>
-                                    <p className="mt-2 text-center text-xs font-semibold uppercase tracking-[0.12em] text-[#5f5154]">
-                                        {color.code}
-                                    </p>
-                                </div>
-                            ))}
-                        </div>
+                        {selectedPalette.colors.length > 0 ? (
+                            <div
+                                ref={gridRef}
+                                className={`grid gap-3 ${
+                                    selectedPalette.variant === "double"
+                                        ? "grid-cols-2 sm:grid-cols-3 xl:grid-cols-4"
+                                        : "grid-cols-3 sm:grid-cols-4 xl:grid-cols-5"
+                                }`}
+                            >
+                                {selectedPalette.colors.map((color) => (
+                                    <PaletteColorCard
+                                        key={color.code}
+                                        collection={selectedPalette}
+                                        code={color.code}
+                                        imageAlt={color.imageAlt}
+                                        imageSrc={color.imageSrc}
+                                        detailImageSrc={color.detailImageSrc}
+                                    />
+                                ))}
+                            </div>
+                        ) : (
+                            <div
+                                ref={gridRef}
+                                className="rounded-md border border-[#ead0d4] bg-[#fffaf8] px-5 py-8 text-center text-sm leading-6 text-[#6a5b5f]"
+                            >
+                                {palette.emptyText}
+                            </div>
+                        )}
 
                         {canExpand ? (
                             <div
@@ -147,5 +185,68 @@ export function PaletteSection({
                 </div>
             </div>
         </section>
+    );
+}
+
+function PaletteColorCard({
+    collection,
+    code,
+    imageAlt,
+    imageSrc,
+    detailImageSrc,
+}: {
+    collection: PaletteCollection;
+    code: string;
+    imageAlt: string;
+    imageSrc: string;
+    detailImageSrc?: string;
+}) {
+    return (
+        <div className="rounded-md border border-[#ead0d4] bg-[#fffaf8] p-2">
+            {collection.variant === "double" && detailImageSrc ? (
+                <div className="grid grid-cols-2 gap-1.5">
+                    <div className="relative aspect-[4/5] overflow-hidden rounded-sm border border-black/5 bg-white">
+                        <Image
+                            src={imageSrc}
+                            alt={`${imageAlt} view 1`}
+                            fill
+                            sizes="(min-width: 1280px) 12vw, (min-width: 640px) 22vw, 42vw"
+                            unoptimized
+                            className="h-full w-full object-contain p-1"
+                        />
+                    </div>
+                    <div className="relative aspect-[4/5] overflow-hidden rounded-sm border border-black/5 bg-white">
+                        <Image
+                            src={detailImageSrc}
+                            alt={`${imageAlt} view 2`}
+                            fill
+                            sizes="(min-width: 1280px) 12vw, (min-width: 640px) 22vw, 42vw"
+                            unoptimized
+                            className="h-full w-full object-contain p-1"
+                        />
+                    </div>
+                </div>
+            ) : (
+                <div
+                    className={`relative overflow-hidden rounded-sm border border-black/5 ${
+                        collection.id === "gradient" ? "aspect-[1/2] bg-transparent" : "aspect-square bg-white"
+                    }`}
+                >
+                    <Image
+                        src={imageSrc}
+                        alt={imageAlt}
+                        fill
+                        sizes="(min-width: 1280px) 10vw, (min-width: 640px) 18vw, 28vw"
+                        unoptimized
+                        className={`h-full w-full ${
+                            collection.id === "gradient" ? "object-cover" : "object-contain p-1"
+                        }`}
+                    />
+                </div>
+            )}
+            <p className="mt-2 text-center text-xs font-semibold uppercase tracking-[0.12em] text-[#5f5154]">
+                {code}
+            </p>
+        </div>
     );
 }

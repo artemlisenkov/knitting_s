@@ -89,12 +89,6 @@ export function LandingHeader({
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    useEffect(() => {
-        if (!isHidden) return;
-
-        setIsMobileMenuOpen(false);
-    }, [isHidden]);
-
     return (
         <>
             <div
@@ -221,7 +215,14 @@ export function LandingHeader({
                 </nav>
             </header>
 
-            <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+            <Sheet
+                open={isMobileMenuOpen && !isHidden}
+                onOpenChange={(isOpen) => {
+                    if (isHidden) return;
+
+                    setIsMobileMenuOpen(isOpen);
+                }}
+            >
                 <SheetContent
                     side="left"
                     className="!shadow-none z-[75] w-[82vw] max-w-[320px] border-r border-[#ead0d4] bg-white/82 p-0 backdrop-blur-md sm:!shadow-lg"
