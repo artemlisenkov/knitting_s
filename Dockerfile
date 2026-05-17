@@ -1,9 +1,14 @@
 # syntax=docker/dockerfile:1.7
 
-FROM node:22-bookworm-slim AS base
+FROM oraclelinux:9 AS base
 
 ENV NEXT_TELEMETRY_DISABLED=1
 WORKDIR /app
+
+RUN --mount=type=cache,target=/var/cache/dnf \
+    dnf -y module enable nodejs:22 && \
+    dnf -y install nodejs npm && \
+    dnf clean all
 
 FROM base AS deps
 
@@ -32,12 +37,13 @@ RUN --mount=type=cache,target=/app/.next/cache \
     GOOGLE_CLIENT_SECRET="$GOOGLE_CLIENT_SECRET" \
     ADMIN_EMAILS="$ADMIN_EMAILS" \
     npm run build
+
 RUN mkdir -p .next/standalone/public/uploads
 RUN cp -R public/. .next/standalone/public/
 RUN mkdir -p .next/standalone/.next
 RUN cp -R .next/static .next/standalone/.next/static
 
-FROM node:22-bookworm-slim AS runner
+FROM base AS runner
 
 WORKDIR /app
 
