@@ -1,0 +1,23 @@
+services:
+  shop:
+    container_name: kate-crochet
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: kate-crochet:latest
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      HOSTNAME: 0.0.0.0
+      PORT: 3000
+      NODE_OPTIONS: --max-old-space-size=3072
+      BETTER_AUTH_URL: ${BETTER_AUTH_URL}
+      BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET}
+      DATABASE_URL: ${DATABASE_URL}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
+      ADMIN_EMAILS: ${ADMIN_EMAILS}
+    volumes:
+      - ${UPLOADS_DIR:-/var/www/shared/uploads}:/app/public/uploads
