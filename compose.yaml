@@ -4,6 +4,13 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        BETTER_AUTH_URL: ${BETTER_AUTH_URL}
+        BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET}
+        DATABASE_URL: ${DATABASE_URL}
+        GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+        GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
+        ADMIN_EMAILS: ${ADMIN_EMAILS}
     image: kate-crochet:latest
     restart: unless-stopped
     ports:

@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "setup": "./scripts/setup-project.sh",
-    "dev": "next dev --webpack",
-    "build": "NODE_OPTIONS=--max-old-space-size=3072 next build --webpack",
+    "dev": "next dev",
+    "build": "NODE_OPTIONS=--max-old-space-size=3072 next build",
     "start": "NODE_OPTIONS=--max-old-space-size=3072 next start",
     "lint": "eslint",
     "docker:build": "docker compose build",
