@@ -3,7 +3,6 @@ import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import { cn } from "@/src/lib/utils";
-import {Provider} from "@/src/providers";
 
 export const metadata: Metadata = {
   applicationName: "Kate Crochet",
@@ -34,9 +33,7 @@ export default function RootLayout({
       className={cn("h-full", "antialiased", GeistSans.variable, GeistMono.variable, "font-sans")}
     >
       <body className="min-h-full flex flex-col">
-        <Provider>
-          {children}
-        </Provider>
+        {children}
       </body>
     </html>
   );

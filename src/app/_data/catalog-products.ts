@@ -1,6 +1,7 @@
 import "server-only";
 
 import { asc, eq } from "drizzle-orm";
+import { unstable_cache } from "next/cache";
 import { db } from "@/src/db";
 import { catalogProduct, catalogProductImage } from "@/src/db/schema";
 import { toPublicAssetPath } from "@/src/lib/public-asset-path";
@@ -69,5 +70,13 @@ export const getPublishedCatalogProducts = async () => {
 
     return Array.from(products.values());
 };
+
+export const getCachedPublishedCatalogProducts = unstable_cache(
+    getPublishedCatalogProducts,
+    ["published-catalog-products"],
+    {
+        revalidate: 300,
+    }
+);
 
 export type PublishedCatalogProduct = Awaited<ReturnType<typeof getPublishedCatalogProducts>>[number];
