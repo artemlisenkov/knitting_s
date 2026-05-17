@@ -5,15 +5,18 @@ import { ArrowLeftIcon } from "lucide-react";
 import { Button } from "@/src/components/ui/button";
 import { CatalogProductMediaGallery } from "@/src/app/_ui/catalog/catalog-product-media-gallery";
 import { CatalogProductPrice } from "@/src/app/_ui/catalog/catalog-product-price";
+import { CatalogProductUsedColors } from "@/src/app/_ui/catalog/catalog-product-used-colors";
 import type { CatalogDisplayProduct } from "@/src/app/_ui/catalog/catalog-product-types";
 
 export function CatalogMobileProductPage({
     product,
     categoryTitle,
+    usedColorsLabel,
     onClose,
 }: {
     product: CatalogDisplayProduct;
     categoryTitle: string;
+    usedColorsLabel: string;
     onClose: () => void;
 }) {
     useEffect(() => {
@@ -71,6 +74,12 @@ export function CatalogMobileProductPage({
                             <p className="mt-4 text-base leading-7 text-[#5f5154]">
                                 {product.description}
                             </p>
+                            <div className="mt-6 border-t border-[#ead0d4] pt-5">
+                                <CatalogProductUsedColors
+                                    colors={product.usedColors}
+                                    label={usedColorsLabel}
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>

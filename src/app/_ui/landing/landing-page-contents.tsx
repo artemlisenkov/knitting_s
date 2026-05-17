@@ -4,7 +4,6 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { CatalogSection } from "@/src/app/_ui/catalog/catalog-section";
 import { AboutSection } from "@/src/app/_ui/sections/about-section";
-import { CustomOrderSection } from "@/src/app/_ui/sections/custom-order-section";
 import {
     DevViewportSwitch,
     type DevPreviewMode,
@@ -14,7 +13,7 @@ import {
     landingTranslations,
     type LandingLanguage,
 } from "@/src/app/_ui/landing/landing-translations";
-import { MeasurementsSection } from "@/src/app/_ui/sections/measurements-section";
+import { OrderSection } from "@/src/app/_ui/sections/order-section";
 import { PaletteSection } from "@/src/app/_ui/sections/palette-section";
 import { WelcomeSection } from "@/src/app/_ui/sections/welcome-section";
 import type { PublishedCatalogProduct } from "@/src/app/_data/catalog-products";
@@ -86,11 +85,9 @@ export const LandingPageContents = ({
     };
 
     const navItems = [
-        { label: translation.nav.welcome, href: "#home" },
         { label: translation.nav.catalog, href: "#catalog" },
         { label: translation.nav.palette, href: "#palette" },
-        { label: translation.nav.measurements, href: "#measurements" },
-        { label: translation.nav.customOrder, href: "#customOrder" },
+        { label: translation.nav.order, href: "#order" },
         { label: translation.nav.contactDelivery, href: "#contact" },
     ];
 
@@ -151,9 +148,10 @@ export const LandingPageContents = ({
 
                 <PaletteSection palette={translation.palette} />
 
-                <MeasurementsSection measurements={translation.measurements} />
-
-                <CustomOrderSection customOrder={translation.customOrder} />
+                <OrderSection
+                    measurements={translation.measurements}
+                    customOrder={translation.customOrder}
+                />
 
                 <AboutSection
                     aboutMe={translation.aboutMe}

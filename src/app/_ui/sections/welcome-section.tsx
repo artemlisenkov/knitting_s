@@ -160,9 +160,6 @@ export function WelcomeSection({
                                         <h1 className="font-heading mt-3 max-w-[11ch] text-[2.3rem] font-semibold leading-[0.94] text-white sm:mt-4 sm:text-6xl lg:text-7xl">
                                             {product.shortTitle}
                                         </h1>
-                                        <p className="mt-3 max-w-md text-sm leading-6 text-white/78 sm:mt-5 sm:max-w-lg sm:text-lg sm:leading-7">
-                                            {product.description}
-                                        </p>
 
                                         <Button
                                             type="button"

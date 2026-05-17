@@ -2,6 +2,7 @@
 
 import { toPublicAssetPath } from "@/src/lib/public-asset-path";
 import { staticCatalogProductGalleries } from "@/src/app/_ui/catalog/static-catalog-product-galleries";
+import { staticCatalogProductUsedColors } from "@/src/app/_ui/catalog/static-catalog-product-used-colors";
 import type { PublishedCatalogProduct } from "@/src/app/_data/catalog-products";
 import type {
     CatalogDisplayProduct,
@@ -49,6 +50,7 @@ export function getGroupDisplayProducts({
                 ...product,
                 imageSrc,
                 galleryImages: createProductGallery(galleryImages[0], galleryImages.slice(1)),
+                usedColors: staticCatalogProductUsedColors[product.id],
             };
         }),
         ...databaseProducts
@@ -75,6 +77,7 @@ export function getGroupDisplayProducts({
                             alt: image.imageAlt ?? imageAlt,
                         }))
                     ),
+                    usedColors: undefined,
                 };
             }),
     ] satisfies CatalogDisplayProduct[];
@@ -101,8 +104,13 @@ export function getWelcomeDisplayProducts({
     const categoryLabels = new Map(
         catalog.groups.map((group) => [group.id, catalog.kindLabels[group.id]] as const)
     );
+    const welcomeGroupOrder = ["cardigans", "tops"] as const;
+    const sortedGroups = [...catalog.groups].sort(
+        (leftGroup, rightGroup) =>
+            welcomeGroupOrder.indexOf(leftGroup.id) - welcomeGroupOrder.indexOf(rightGroup.id)
+    );
 
-    return catalog.groups.flatMap((group) =>
+    return sortedGroups.flatMap((group) =>
         getGroupDisplayProducts({
             group,
             databaseProducts,

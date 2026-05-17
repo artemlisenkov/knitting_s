@@ -6,6 +6,7 @@ import { useLayoutEffect, useRef, useState } from "react";
 import {
     paletteCollections,
     type PaletteCollection,
+    type PaletteCollectionSection,
     type PaletteSetId,
 } from "@/src/app/_ui/landing/palette-colors";
 import type { LandingCopy } from "@/src/app/_ui/landing/landing-types";
@@ -25,6 +26,12 @@ export function PaletteSection({
     const selectedPalette =
         paletteCollections.find((collection) => collection.id === selectedPaletteId) ??
         paletteCollections[0];
+    const selectedSections =
+        selectedPalette.sections ?? [{ id: selectedPalette.id, colors: selectedPalette.colors }];
+    const selectedColorCount = selectedSections.reduce(
+        (totalCount, section) => totalCount + section.colors.length,
+        0
+    );
 
     useLayoutEffect(() => {
         const grid = gridRef.current;
@@ -34,7 +41,7 @@ export function PaletteSection({
         }
 
         const updateHeights = () => {
-            const items = Array.from(grid.children) as HTMLElement[];
+            const items = Array.from(grid.querySelectorAll<HTMLElement>("[data-palette-card]"));
             const nextFullHeight = grid.scrollHeight;
 
             setFullHeight(nextFullHeight);
@@ -44,7 +51,9 @@ export function PaletteSection({
                 return;
             }
 
-            const gridStyles = window.getComputedStyle(grid);
+            const firstGrid =
+                grid.querySelector<HTMLElement>("[data-palette-grid]") ?? grid;
+            const gridStyles = window.getComputedStyle(firstGrid);
             const columnCount = Math.max(
                 1,
                 gridStyles.gridTemplateColumns.split(" ").filter(Boolean).length
@@ -75,7 +84,7 @@ export function PaletteSection({
         return () => {
             resizeObserver.disconnect();
         };
-    }, [selectedPalette.colors.length, selectedPalette.id, selectedPalette.variant]);
+    }, [selectedColorCount, selectedPalette.id, selectedPalette.variant]);
 
     const canExpand = collapsedHeight !== null && fullHeight - collapsedHeight > 8;
     const visibleHeight = isExpanded || !canExpand ? fullHeight : collapsedHeight;
@@ -123,23 +132,13 @@ export function PaletteSection({
                         className="relative overflow-hidden transition-[max-height] duration-500 ease-in-out"
                         style={{ maxHeight: `${visibleHeight}px` }}
                     >
-                        {selectedPalette.colors.length > 0 ? (
-                            <div
-                                ref={gridRef}
-                                className={`grid gap-3 ${
-                                    selectedPalette.variant === "double"
-                                        ? "grid-cols-2 sm:grid-cols-3 xl:grid-cols-4"
-                                        : "grid-cols-3 sm:grid-cols-4 xl:grid-cols-5"
-                                }`}
-                            >
-                                {selectedPalette.colors.map((color) => (
-                                    <PaletteColorCard
-                                        key={color.code}
+                        {selectedColorCount > 0 ? (
+                            <div ref={gridRef} className="space-y-5">
+                                {selectedSections.map((section) => (
+                                    <PaletteColorSection
+                                        key={section.id}
                                         collection={selectedPalette}
-                                        code={color.code}
-                                        imageAlt={color.imageAlt}
-                                        imageSrc={color.imageSrc}
-                                        detailImageSrc={color.detailImageSrc}
+                                        section={section}
                                     />
                                 ))}
                             </div>
@@ -188,21 +187,60 @@ export function PaletteSection({
     );
 }
 
+function PaletteColorSection({
+    collection,
+    section,
+}: {
+    collection: PaletteCollection;
+    section: PaletteCollectionSection;
+}) {
+    return (
+        <div>
+            {section.dividerAbove ? <div className="mb-5 h-px bg-[#e3c7cc]" /> : null}
+            <div
+                data-palette-grid
+                className={`grid gap-3 ${
+                    collection.variant === "double"
+                        ? "grid-cols-2 sm:grid-cols-3 xl:grid-cols-4"
+                        : "grid-cols-3 sm:grid-cols-4 xl:grid-cols-5"
+                }`}
+            >
+                {section.colors.map((color) => (
+                    <PaletteColorCard
+                        key={`${section.id}-${color.code}`}
+                        collection={collection}
+                        sectionId={section.id}
+                        code={color.code}
+                        imageAlt={color.imageAlt}
+                        imageSrc={color.imageSrc}
+                        detailImageSrc={color.detailImageSrc}
+                    />
+                ))}
+            </div>
+        </div>
+    );
+}
+
 function PaletteColorCard({
     collection,
+    sectionId,
     code,
     imageAlt,
     imageSrc,
     detailImageSrc,
 }: {
     collection: PaletteCollection;
+    sectionId: string;
     code: string;
     imageAlt: string;
     imageSrc: string;
     detailImageSrc?: string;
 }) {
+    const isMainWarmSection = collection.id === "warm" && sectionId === "warm";
+    const imageInsetClass = isMainWarmSection ? "p-3" : "p-1";
+
     return (
-        <div className="rounded-md border border-[#ead0d4] bg-[#fffaf8] p-2">
+        <div data-palette-card className="rounded-md border border-[#ead0d4] bg-[#fffaf8] p-2">
             {collection.variant === "double" && detailImageSrc ? (
                 <div className="grid grid-cols-2 gap-1.5">
                     <div className="relative aspect-[4/5] overflow-hidden rounded-sm border border-black/5 bg-white">
@@ -212,7 +250,7 @@ function PaletteColorCard({
                             fill
                             sizes="(min-width: 1280px) 12vw, (min-width: 640px) 22vw, 42vw"
                             unoptimized
-                            className="h-full w-full object-contain p-1"
+                            className={`h-full w-full object-contain ${imageInsetClass}`}
                         />
                     </div>
                     <div className="relative aspect-[4/5] overflow-hidden rounded-sm border border-black/5 bg-white">
@@ -222,7 +260,7 @@ function PaletteColorCard({
                             fill
                             sizes="(min-width: 1280px) 12vw, (min-width: 640px) 22vw, 42vw"
                             unoptimized
-                            className="h-full w-full object-contain p-1"
+                            className={`h-full w-full object-contain ${imageInsetClass}`}
                         />
                     </div>
                 </div>
@@ -239,7 +277,7 @@ function PaletteColorCard({
                         sizes="(min-width: 1280px) 10vw, (min-width: 640px) 18vw, 28vw"
                         unoptimized
                         className={`h-full w-full ${
-                            collection.id === "gradient" ? "object-cover" : "object-contain p-1"
+                            collection.id === "gradient" ? "object-cover" : `object-contain ${imageInsetClass}`
                         }`}
                     />
                 </div>

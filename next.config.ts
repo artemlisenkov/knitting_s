@@ -17,6 +17,10 @@ const nextConfig: NextConfig = {
         search: "",
       },
       {
+        pathname: "/ai/**",
+        search: "",
+      },
+      {
         pathname: "/uploads/**",
         search: "",
       },

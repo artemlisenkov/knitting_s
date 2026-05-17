@@ -17,6 +17,7 @@ export const staticCatalogProductGalleries: Record<static_products, string[]> = 
     "top-zebra": [
         "/catalog/tops/zebra/top-zebra.jpg",
         "/catalog/tops/zebra/top-zebra-alt.jpg",
+        "/catalog/tops/zebra/top-zebra-side.jpg",
         "/catalog/tops/zebra/top-zebra-back.jpg",
     ],
     "top-browny": [

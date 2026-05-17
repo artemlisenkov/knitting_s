@@ -57,6 +57,7 @@ export function CatalogSection({
                             fallbackProductDescription={catalog.dynamicProductDescription}
                             fallbackProductImageAlt={catalog.dynamicProductImageAlt}
                             emptyText={catalog.emptyText}
+                            usedColorsLabel={catalog.usedColorsLabel}
                             isVisible={isCatalogVisible}
                             isAdminView={isAdminView}
                             selectedProductId={selectedProductId}
@@ -77,6 +78,7 @@ function CatalogProductGroup({
     fallbackProductDescription,
     fallbackProductImageAlt,
     emptyText,
+    usedColorsLabel,
     isVisible,
     isAdminView,
     selectedProductId,
@@ -89,6 +91,7 @@ function CatalogProductGroup({
     fallbackProductDescription: string;
     fallbackProductImageAlt: string;
     emptyText: string;
+    usedColorsLabel: string;
     isVisible: boolean;
     isAdminView: boolean;
     selectedProductId: string | null;
@@ -191,9 +194,6 @@ function CatalogProductGroup({
                                             compact
                                         />
                                     ) : null}
-                                    <span className="mt-1.5 block text-xs leading-5 text-[#6a5b5f] sm:mt-2 sm:text-sm sm:leading-6">
-                                        {product.description}
-                                    </span>
                                 </button>
                             </article>
                         ))}
@@ -211,6 +211,7 @@ function CatalogProductGroup({
                                     key={selectedProduct.id}
                                     product={selectedProduct}
                                     categoryTitle={group.title}
+                                    usedColorsLabel={usedColorsLabel}
                                 />
                             ) : null}
                         </Dialog>
@@ -221,6 +222,7 @@ function CatalogProductGroup({
                             key={mobileSelectedProduct.id}
                             product={mobileSelectedProduct}
                             categoryTitle={group.title}
+                            usedColorsLabel={usedColorsLabel}
                             onClose={closeMobileProductPage}
                         />
                     ) : null}

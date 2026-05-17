@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { FaInstagram, FaTelegramPlane } from "react-icons/fa";
+import { playfairDisplay } from "@/src/app/fonts";
 import { toPublicAssetPath } from "@/src/lib/public-asset-path";
 import type { LandingCopy } from "@/src/app/_ui/landing/landing-types";
 
@@ -13,8 +14,8 @@ export function AboutSection({
     contactDelivery: LandingCopy["contactDelivery"];
 }) {
     return (
-        <section id="contact" className="scroll-mt-16 border-b border-[#ead0d4] bg-[#f8eef0] pl-1 pr-4 py-6 sm:pl-2 sm:pr-6 sm:py-7 lg:pl-2 lg:pr-6 lg:py-8">
-            <div className="mx-auto grid w-full max-w-6xl items-center gap-5 lg:ml-0 lg:mr-auto lg:grid-cols-[minmax(0,1fr)_26rem] lg:gap-5">
+        <section id="contact" className="scroll-mt-16 border-b border-[#ead0d4] bg-white/50 px-4 py-8 sm:px-6 sm:py-10">
+            <div className="mx-auto grid w-full max-w-5xl items-center justify-center gap-6 lg:grid-cols-[minmax(0,1fr)_24rem] lg:gap-8">
                 <div className="order-2 flex flex-col items-center text-center lg:order-1">
                     <p className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-[#b05b66]">
                         {contactDelivery.eyebrow}
@@ -25,17 +26,9 @@ export function AboutSection({
                     </h1>
 
                     <div className="my-7 h-px w-24 bg-[#d88c98]" />
-
                     <p className="max-w-xl text-base leading-7 text-[#5f5154] sm:text-lg">
-                        {aboutMe.description}
+                        {contactDelivery.intro}
                     </p>
-
-                    <div className="mt-8 flex w-full max-w-xl flex-col items-center">
-                        <div className="h-px w-full max-w-[220px] bg-[#ead0d4]" />
-                        <p className="mt-4 max-w-xl text-base leading-7 text-[#5f5154] sm:text-lg">
-                            {contactDelivery.intro}
-                        </p>
-                    </div>
 
                     <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:justify-center">
                         <a
@@ -60,7 +53,7 @@ export function AboutSection({
                 </div>
 
                 <div className="order-1 lg:order-2">
-                    <div className="group/photo mx-auto max-w-[22rem] overflow-hidden rounded-md border border-[#d78d98] bg-[#fffaf8] p-3 sm:max-w-[24rem] sm:shadow-[12px_12px_0_rgba(176,91,102,0.2)] lg:mx-0 lg:max-w-[26rem]">
+                    <div className="group/photo mx-auto max-w-[22rem] overflow-hidden rounded-md border border-[#d78d98] bg-[#fffaf8] p-3 sm:max-w-[24rem] sm:shadow-[12px_12px_0_rgba(176,91,102,0.2)] lg:max-w-[24rem]">
                         <div className="relative aspect-[4/5] overflow-hidden rounded-md bg-white">
                             <Image
                                 src={toPublicAssetPath("/main/portfolio_kate.jpg")}
@@ -73,10 +66,10 @@ export function AboutSection({
                             />
                         </div>
                         <div className="px-1 pb-2 pt-5 text-left">
-                            <p className="font-heading text-3xl font-semibold uppercase leading-none tracking-[0.08em] text-[#2c2426]">
-                                Kate
+                            <p className={`${playfairDisplay.className} text-[1.95rem] leading-none font-bold text-[#2c2426] sm:text-[2.55rem]`}>
+                                KATE
                             </p>
-                            <p className="font-heading mt-2 text-2xl font-medium leading-none text-[#2c2426]">
+                            <p className="mt-2.5 text-[11px] font-semibold uppercase tracking-[0.28em] text-[#7a666b] sm:text-sm">
                                 Crochet Maker
                             </p>
                         </div>
