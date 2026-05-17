@@ -17,6 +17,7 @@ export function PaletteSection({
 }: {
     palette: LandingCopy["palette"];
 }) {
+    const sectionRef = useRef<HTMLElement | null>(null);
     const gridRef = useRef<HTMLDivElement | null>(null);
     const [selectedPaletteId, setSelectedPaletteId] = useState<PaletteSetId>("baby-cotton");
     const [isExpanded, setIsExpanded] = useState(false);
@@ -89,8 +90,27 @@ export function PaletteSection({
     const canExpand = collapsedHeight !== null && fullHeight - collapsedHeight > 8;
     const visibleHeight = isExpanded || !canExpand ? fullHeight : collapsedHeight;
 
+    const scrollToPalette = () => {
+        const section = sectionRef.current;
+
+        if (!section) {
+            return;
+        }
+
+        const nextTop = Math.max(0, window.scrollY + section.getBoundingClientRect().top - 16);
+
+        window.scrollTo({
+            top: nextTop,
+            behavior: "smooth",
+        });
+    };
+
     return (
-        <section id="palette" className="scroll-mt-0 border-y border-[#ead0d4] bg-white/50 px-4 py-12 sm:px-6">
+        <section
+            ref={sectionRef}
+            id="palette"
+            className="scroll-mt-0 border-y border-[#ead0d4] bg-white/50 px-4 py-12 sm:px-6"
+        >
             <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
                 <div>
                     <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#994d59]">
@@ -172,7 +192,15 @@ export function PaletteSection({
                                 size="icon-sm"
                                 aria-label={isExpanded ? "Collapse palette" : "Expand palette"}
                                 aria-expanded={isExpanded}
-                                onClick={() => setIsExpanded((currentState) => !currentState)}
+                                onClick={() =>
+                                    setIsExpanded((currentState) => {
+                                        if (currentState) {
+                                            requestAnimationFrame(scrollToPalette);
+                                        }
+
+                                        return !currentState;
+                                    })
+                                }
                                 className="h-8 w-16 border-[#d9bcc1] bg-white/75 text-[#746569] hover:bg-[#fff4f6] hover:text-[#5f5154]"
                             >
                                 <ChevronDownIcon
